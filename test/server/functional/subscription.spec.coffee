@@ -361,6 +361,7 @@ describe 'Subscriptions', ->
               Payment.findOne paymentQuery, (err, payment) ->
                 expect(err).toBeNull()
                 expect(payment).not.toBeNull()
+                return done() if payment is null
                 expect(payment.get('amount')).toEqual(0)
                 expect(payment.get('gems')).toBeGreaterThan(subGems - 1)
                 done()
@@ -406,6 +407,8 @@ describe 'Subscriptions', ->
         expect(user.get('stripe').customerID).toBeDefined()
         expect(user.get('stripe').planID).toBeUndefined()
         expect(user.get('stripe').token).toBeUndefined()
+        expect(user.get('stripe').subscriptionID).toBeDefined()
+        return done() unless user.get('stripe').subscriptionID
         stripe.customers.retrieveSubscription user.get('stripe').customerID, user.get('stripe').subscriptionID, (err, subscription) ->
           expect(err).toBeNull()
           expect(subscription).not.toBeNull()
@@ -422,11 +425,11 @@ describe 'Subscriptions', ->
       expect(err).toBeNull()
       return done() if err
       expect(res.statusCode).toBe(200)
-      expect(body.stripe.customerID).toBeDefined()
+      expect(body.stripe?.customerID).toBeDefined()
       updatedUser = body
 
       # Call webhooks for invoices
-      options = customer: body.stripe.customerID, limit: 100
+      options = customer: body.stripe?.customerID, limit: 100
       stripe.invoices.list options, (err, invoices) ->
         expect(err).toBeNull()
         expect(invoices).not.toBeNull()
@@ -682,6 +685,7 @@ describe 'Subscriptions', ->
                         stripe.customers.retrieveSubscription customerID, subscriptionID, (err, subscription) ->
                           expect(err).toBeNull()
                           expect(subscription).not.toBeNull()
+                          return done() unless subscription
                           expect(subscription.discount?.coupon?.id).toEqual('free')
                           done()
 
@@ -714,6 +718,7 @@ describe 'Subscriptions', ->
                       stripe.customers.retrieveSubscription customerID, subscriptionID, (err, subscription) ->
                         expect(err).toBeNull()
                         expect(subscription).not.toBeNull()
+                        return done() unless subscription
                         expect(subscription.discount?.coupon?.id).toEqual('free')
                         done()
 
@@ -760,6 +765,8 @@ describe 'Subscriptions', ->
                       expect(err).toBeNull()
                       stripeInfo = user1.get('stripe')
                       expect(stripeInfo.prepaidCode).toEqual(prepaid.get('code'))
+                      expect(stripeInfo.subscriptionID).toBeDefined()
+                      return done() unless stripeInfo.subscriptionID
 
                       # Delete subscription
                       stripe.customers.retrieveSubscription stripeInfo.customerID, stripeInfo.subscriptionID, (err, subscription) ->
@@ -793,8 +800,13 @@ describe 'Subscriptions', ->
         createNewUser (user2) ->
           loginNewUser (user1) ->
             subscribeRecipients user1, [user2], token, (updatedUser) ->
-              customerID = updatedUser.stripe.customerID
-              subscriptionID = updatedUser.stripe.recipients[0].subscriptionID
+              expect(updatedUser).not.toBeNull()
+              return done() unless updatedUser
+              customerID = updatedUser.stripe?.customerID
+              expect(customerID).toBeDefined()
+              subscriptionID = updatedUser.stripe?.recipients[0]?.subscriptionID
+              expect(subscriptionID).toBeDefined()
+              return done() unless customerID and subscriptionID
               loginUser user2, (user2) ->
                 request.del {uri: "#{userURL}/#{user2.id}"}, (err, res) ->
                   expect(err).toBeNull()
@@ -1020,8 +1032,12 @@ describe 'Subscriptions', ->
           createNewUser (user2) ->
             loginNewUser (user1) ->
               subscribeRecipients user1, [user2, user3], token, (updatedUser) ->
-                customerID = updatedUser.stripe.customerID
-                subscriptionID = updatedUser.stripe.sponsorSubscriptionID
+                expect(updatedUser).not.toBeNull()
+                return done() unless updatedUser
+
+                customerID = updatedUser.stripe?.customerID
+                subscriptionID = updatedUser.stripe?.sponsorSubscriptionID
+                return done() unless customerID and subscriptionID
 
                 # Find Stripe sponsor subscription
                 stripe.customers.retrieveSubscription customerID, subscriptionID, (err, subscription) ->
