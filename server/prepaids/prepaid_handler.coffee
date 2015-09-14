@@ -82,10 +82,11 @@ PrepaidHandler = class PrepaidHandler extends Handler
           Prepaid.generateNewCode (code) =>
             return @sendDatabaseError(res, 'Database error.') unless code
             prepaid = new Prepaid
-              creator: req.user.id
+              creator: req.user._id
               type: req.body.type
               code: code
               maxRedeemers: req.body.maxRedeemers
+              redeemers: []
               properties:
                 months: req.body.months
             prepaid.save (err) =>

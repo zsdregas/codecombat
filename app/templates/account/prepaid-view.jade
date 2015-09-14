@@ -37,14 +37,19 @@ block content
                 .col-sm-10
                   p.form-control-static $
                     span#total #{purchase.total}
-              button#purchase-button.btn.btn-success(data-i18n="account_prepaid.purchase_button")
+              button#purchase-button.btn.btn-success.pull-right(data-i18n="account_prepaid.purchase_button")
 
       .col-md-6
         .panel.panel-default
           .panel-heading
             .panel-title(data-i18n="account_prepaid.redeem_codes")
           .panel-body
-            p TODO: Panel for redeeming a code.
+            .form-horizontal
+              .form-group
+                label.control-label.col-sm-4(for="ppc") Prepaid Code:
+                .col-sm-8
+                  input#ppc.form-control(name="ppc", type="text", value="#{ppc}" required)
+              button#redeem-button.btn.btn-success.pull-right Redeem This Code to My Account
     .row
       .col-md-10.col-md-offset-1
         .panel.panel-default
@@ -55,25 +60,24 @@ block content
               table.table.table-striped
                 tr
                   th Code
-                  th Users
+                  th Redeemers
                   th Months
-                  th Type
                   th Purchased / Redeemed
                 for code in codes.models
-                  - var properties = code.get('properties')
-                  - var redeemers = code.get('redeemers')
-                  if redeemers
-                    - var redeemed = redeemers.length
-                  else
-                    - var redeemed = '0'
-                  tr
-                    td= code.get('code')
-                    td #{redeemed} / #{code.get('maxRedeemers')}
-                    td= properties.months || '-'
-                    td= code.get('type')
-                    if code.get('creator') == me.id
-                      td Purchased
+                  if code.get('type') === 'terminal_subscription'
+                    - var properties = code.get('properties')
+                    - var redeemers = code.get('redeemers')
+                    if redeemers
+                      - var redeemed = redeemers.length
                     else
-                      td Redeemed
+                      - var redeemed = '0'
+                    tr
+                      td= code.get('code')
+                      td #{redeemed} / #{code.get('maxRedeemers')}
+                      td= properties.months || '-'
+                      if code.get('creator') == me.id
+                        td Purchased
+                      else
+                        td Redeemed
             else
               p No codes yet!

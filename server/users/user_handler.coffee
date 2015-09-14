@@ -306,6 +306,7 @@ UserHandler = class UserHandler extends Handler
     return @avatar(req, res, args[0]) if args[1] is 'avatar'
     return @getByIDs(req, res) if args[1] is 'users'
     return @getNamesByIDs(req, res) if args[1] is 'names'
+    return @getPrepaidCodes(req, res) if args[1] is 'prepaid_codes'
     return @nameToID(req, res, args[0]) if args[1] is 'nameToID'
     return @getLevelSessionsForEmployer(req, res, args[0]) if args[1] is 'level.sessions' and args[2] is 'employer'
     return @getLevelSessions(req, res, args[0]) if args[1] is 'level.sessions'
@@ -325,7 +326,6 @@ UserHandler = class UserHandler extends Handler
     return @getSubSponsor(req, res) if args[1] is 'sub_sponsor'
     return @getSubSponsors(req, res) if args[1] is 'sub_sponsors'
     return @sendOneTimeEmail(req, res, args[0]) if args[1] is 'send_one_time_email'
-    return @getPrepaidCodes(req, res) if args[1] is 'prepaid_codes'
     return @sendNotFoundError(res)
     super(arguments...)
 
@@ -456,13 +456,8 @@ UserHandler = class UserHandler extends Handler
     sendMail emailParams
 
   getPrepaidCodes: (req, res) ->
-    paths = req.path.split('/')
-    urlUser = paths[3]
-    userID = req.user._id+''
-    @sendForbiddenError(res) unless urlUser is userID
-    # TODO: allow queries for other users' codes if logged in user is admin?
-    query = [{ creator: urlUser }, { redeemers: urlUser }]
-    Prepaid.find({}).or(query).exec (err, documents) =>
+    orQuery = [{ creator: req.user._id }, { 'redeemers.userID' :  req.user._id }]
+    Prepaid.find({}).or(orQuery).exec (err, documents) =>
       @sendSuccess(res, documents)
 
   agreeToCLA: (req, res) ->

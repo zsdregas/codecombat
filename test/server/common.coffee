@@ -137,6 +137,12 @@ GLOBAL.purchasePrepaid = (type, maxRedeemers, months, done) ->
       timestamp: new Date().getTime()
   request.post options, done
 
+GLOBAL.subscribeWithPrepaid = (ppc, done) =>
+  options = url: GLOBAL.getURL('/db/subscription/-/subscribe_prepaid')
+  options.json =
+    ppc: ppc
+  request.post options, done
+
 newUserCount = 0
 GLOBAL.createNewUser = (done) ->
   name = password = "user#{newUserCount++}"

@@ -1,5 +1,7 @@
 require '../common'
 config = require '../../../server_config'
+moment = require 'moment'
+{findStripeSubscription} = require '../../../server/lib/utils'
 
 describe '/db/prepaid', ->
   prepaidURL = getURL('/db/prepaid')
@@ -9,7 +11,7 @@ describe '/db/prepaid', ->
 
   joeData = null
   stripe = require('stripe')(config.stripe.secretKey)
-
+  joeCode = null
 
   verifyPrepaid = (user, prepaid, done) ->
     expect(prepaid.creator).toEqual(user.id)
@@ -174,15 +176,17 @@ describe '/db/prepaid', ->
           expect(firstSubscriptionID = joeData.stripe.subscriptionID).toBeDefined()
           expect(joeData.stripe.planID).toBe('basic')
           expect(joeData.stripe.token).toBeUndefined()
-          purchasePrepaid 'terminal_subscription', 3, 1, (err, res, prepaid) ->
+          purchasePrepaid 'terminal_subscription', 3, 3, (err, res, prepaid) ->
             expect(err).toBeNull()
             expect(res.statusCode).toBe(200)
             expect(prepaid.type).toEqual('terminal_subscription')
             expect(prepaid.code).toBeDefined()
+            # Saving this code for later tests
+            joeCode = prepaid.code
             expect(prepaid.creator).toBeDefined()
             expect(prepaid.maxRedeemers).toEqual(3)
             expect(prepaid.properties).toBeDefined()
-            expect(prepaid.properties.months).toEqual(1)
+            expect(prepaid.properties.months).toEqual(3)
             done()
 
   it 'Should have logged a Payment with the correct amount', (done) ->
@@ -193,12 +197,106 @@ describe '/db/prepaid', ->
         expect(err).toBeNull()
         expect(payments).not.toBeNull()
         expect(payments.length).toEqual(1)
-        expect(payments[0].get('amount')).toEqual(2997)
+        expect(payments[0].get('amount')).toEqual(8991)
         done()
 
-  # TODO: add a test to redeem a code, so it'll show up in the test below
 
-  it 'can fetch a list of purchased and redeemed prepaid codes', (done) ->
+  it 'Anonymous cant redeem a prepaid code', (done) ->
+    logoutUser () ->
+      subscribeWithPrepaid joeCode, (err, res) ->
+        expect(err).toBeNull()
+        expect(res?.statusCode).toEqual(401)
+        done()
+
+
+  it 'User cant redeem a nonexistant prepaid code', (done) ->
+    loginJoe (joe) ->
+      subscribeWithPrepaid 'abc123', (err, res) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(403)
+        done()
+
+  it 'User cant redeem empty code', (done) ->
+    loginJoe (joe) ->
+      subscribeWithPrepaid '', (err, res) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(403)
+        done()
+
+
+  it 'Creator can redeeem a prepaid code', (done) ->
+    loginJoe (joe) ->
+      expect(joeCode).not.toBeNull()
+      expect(joeData.stripe?.customerID).toBeDefined()
+      expect(joeData.stripe?.subscriptionID).toBeDefined()
+      return done() unless joeData.stripe?.customerID
+
+      # joe has a stripe subscription, so test if the months are added to the end of it.
+      stripe.customers.retrieve joeData.stripe.customerID, (err, customer) =>
+        expect(err).toBeNull()
+
+        findStripeSubscription customer.id, subscriptionID: joeData.stripe?.subscriptionID, (subscription) =>
+          if subscription
+            stripeSubscriptionPeriodEndDate = new moment(subscription.current_period_end * 1000)
+          else
+            expect(stripeSubscriptionPeriodEndDate).toBeDefined()
+            return done()
+
+          subscribeWithPrepaid joeCode, (err, res, result) =>
+            expect(err).toBeNull()
+            expect(res.statusCode).toEqual(200)
+            endDate = stripeSubscriptionPeriodEndDate.add(3, 'months').toISOString().substring(0, 10)
+            expect(result?.stripe?.free).toEqual(endDate)
+            expect(result?.purchased?.gems).toEqual(14000)
+            findStripeSubscription customer.id, subscriptionID: joeData.stripe?.subscriptionID, (subscription) =>
+              expect(subscription).toBeNull()
+              done()
+
+  it 'User can redeem a prepaid code', (done) ->
+    loginSam (sam) ->
+      subscribeWithPrepaid joeCode, (err, res, result) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(200)
+        endDate = new moment().add(3, 'months').toISOString().substring(0, 10)
+        expect(result?.stripe?.free).toEqual(endDate)
+        expect(result?.purchased?.gems).toEqual(10500)
+        done()
+
+  it 'Wont allow the same person to redeem twice', (done) ->
+    loginSam (sam) ->
+      subscribeWithPrepaid joeCode, (err, res, result) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(403)
+        done()
+
+  it 'Will return redeemed code as part of codes list', (done) ->
+    loginSam (sam) ->
+      request.get "#{getURL('/db/user')}/#{sam.id}/prepaid_codes", (err, res) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(200)
+        codes = JSON.parse res.body
+        expect(codes.length).toEqual(1)
+        done()
+
+  it 'Third user can redeem a prepaid code', (done) ->
+    loginNewUser (user) ->
+      subscribeWithPrepaid joeCode, (err, res, result) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(200)
+        endDate = new moment().add(3, 'months').toISOString().substring(0, 10)
+        expect(result?.stripe?.free).toEqual(endDate)
+        expect(result?.purchased?.gems).toEqual(10500)
+        done()
+
+  it 'Fourth user cannot redeem code', (done) ->
+    loginNewUser (user) ->
+      subscribeWithPrepaid joeCode, (err, res, result) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(403)
+        done()
+
+
+  it 'Can fetch a list of purchased and redeemed prepaid codes', (done) ->
     loginJoe (joe) ->
       purchasePrepaid 'terminal_subscription', 3, 1, (err, res, prepaid) ->
         request.get "#{getURL('/db/user')}/#{joe.id}/prepaid_codes", (err, res) ->
@@ -208,13 +306,15 @@ describe '/db/prepaid', ->
           expect(codes.length).toEqual(2)
           expect(codes[0].maxRedeemers).toEqual(3)
           expect(codes[0].properties).toBeDefined()
-          expect(codes[0].properties.months).toEqual(1)
+          expect(codes[0].properties.months).toEqual(3)
           done()
 
-  it 'should refuse to return someone elses codes', (done) ->
-    loginJoe (joe) ->
-      request.get "#{getURL('/db/user')}/12345abc/prepaid_codes", (err, res) ->
-          expect(err).toBeNull()
-          expect(res.statusCode).toEqual(403)
-          expect(res.body).toEqual('Forbidden')
-          done()
+  it 'Test for injection', (done) ->
+    loginNewUser (user) ->
+      code = { $exists: true }
+      subscribeWithPrepaid code, (err, res, result) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).not.toEqual(200)
+        done()
+  # TODO: add a bunch of parallel tests trying to redeem a code with a high maxRedeemers (50?) to see what happens
+

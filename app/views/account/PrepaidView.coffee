@@ -3,7 +3,7 @@ template = require 'templates/account/prepaid-view'
 stripeHandler = require 'core/services/stripe'
 {getPrepaidCodeAmount} = require '../../core/utils'
 CocoCollection = require 'collections/CocoCollection'
-CocoModel = require 'models/CocoModel'
+Prepaid = require '../../models/Prepaid'
 
 module.exports = class PrepaidView extends RootView
   id: 'prepaid-view'
@@ -14,6 +14,7 @@ module.exports = class PrepaidView extends RootView
     'change #users': 'onUsersChanged'
     'change #months': 'onMonthsChanged'
     'click #purchase-button': 'onPurchaseClicked'
+    'click #redeem-button': 'onRedeemClicked'
 
   subscriptions:
     'stripe:received-token': 'onStripeReceivedToken'
@@ -27,18 +28,22 @@ module.exports = class PrepaidView extends RootView
       users: 3
       months: 3
     @updateTotal()
-    userID = me.id
-    url = '/db/user/'+userID+'/prepaid_codes'
-    @codes = new CocoCollection([], { url: url, model: Prepaid })
+
+    @codes = new CocoCollection([], { url: '/db/user/'+me.id+'/prepaid_codes', model: Prepaid })
     @codes.on 'add', (code) =>
       @render?()
+    @codes.on 'sync', (code) =>
+      @render?()
 
-    @fetchPrepaidList()
+    @supermodel.loadCollection(@codes, 'prepaid', {cache: false})
+
+    @ppc = ''
 
   getRenderData: ->
     c = super()
     c.purchase = @purchase
     c.codes = @codes
+    c.ppc = @ppc
     c
 
   updateTotal: ->
@@ -71,6 +76,35 @@ module.exports = class PrepaidView extends RootView
       bitcoin: true
       alipay: if me.get('chinaVersion') or (me.get('preferredLanguage') or 'en-US')[...2] is 'zh' then true else 'auto'
 
+  onRedeemClicked: (e) ->
+    @ppc = $('#ppc').val()
+    # TODO: error message if there's no code entered?
+    return unless @ppc
+    button = e.target
+    @redeemText = $(e.target).text()
+    $(button).text('Redeeming...')
+    button.disabled = true
+
+    options =
+      url: '/db/subscription/-/subscribe_prepaid'
+      method: 'POST'
+      data: { ppc: @ppc }
+
+    options.error = (model, res, options) =>
+      console.error 'FAILED redeeming prepaid code'
+      button.disabled = false
+      $(button).text(@redeemText)
+      # TODO: display UI error message
+
+    options.success = (model, res, options) =>
+      console.log 'SUCCESS redeeming prepaid code'
+      button.disabled = false
+      $(button).text(@redeemText)
+      @supermodel.loadCollection(@codes, 'prepaid', {cache: false})
+      @codes.fetch()
+      @render?()
+
+    @supermodel.addRequestResource('subscribe_prepaid', options, 0).load()
 
   onStripeReceivedToken: (e) ->
     # TODO: show that something is happening in the UI
@@ -98,8 +132,3 @@ module.exports = class PrepaidView extends RootView
 
     @supermodel.addRequestResource('purchase_prepaid', options, 0).load()
 
-  fetchPrepaidList: ->
-    @supermodel.loadCollection(@codes, 'prepaid', {cache: false})
-
-class Prepaid extends CocoModel
-  @className: "Prepaid"
