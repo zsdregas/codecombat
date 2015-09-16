@@ -46,6 +46,9 @@ module.exports = class PrepaidView extends RootView
     c.ppc = @ppc
     c
 
+  uiMessage: (message, type='alert') ->
+    noty text: message, layout: 'topCenter', type: type, killer: false, timeout: 5000, dismissQueue: true, maxVisible: 3
+
   updateTotal: ->
     @purchase.total = getPrepaidCodeAmount(@baseAmount, @purchase.users, @purchase.months)
     @render()
@@ -78,7 +81,7 @@ module.exports = class PrepaidView extends RootView
 
   onRedeemClicked: (e) ->
     @ppc = $('#ppc').val()
-    # TODO: error message if there's no code entered?
+    @uiMessage "You must enter a code.", "error"
     return unless @ppc
     button = e.target
     @redeemText = $(e.target).text()
@@ -94,10 +97,11 @@ module.exports = class PrepaidView extends RootView
       console.error 'FAILED redeeming prepaid code'
       button.disabled = false
       $(button).text(@redeemText)
-      # TODO: display UI error message
+      @uiMessage "Error: Could not redeem prepaid code", "error"
 
     options.success = (model, res, options) =>
       console.log 'SUCCESS redeeming prepaid code'
+      @uiMessage "Prepaid Code Redeemed!", "success"
       button.disabled = false
       $(button).text(@redeemText)
       @supermodel.loadCollection(@codes, 'prepaid', {cache: false})
@@ -124,11 +128,15 @@ module.exports = class PrepaidView extends RootView
 
     options.error = (model, response, options) =>
       console.error 'FAILED: Prepaid purchase', response
-      # TODO: display a UI error message
+      console.error options
+      @uiMessage "Error purchasing prepaid code", "error"
+      # Not sure when this will happen. Stripe popup seems to give appropriate error messages.
 
     options.success = (model, response, options) =>
       console.log 'SUCCESS: Prepaid purchase', model.code
+      @uiMessage "Successfully purchased Prepaid Code!", "success"
       @codes.add(model)
 
+    @uiMessage "Finalizing purchase...", "information"
     @supermodel.addRequestResource('purchase_prepaid', options, 0).load()
 
