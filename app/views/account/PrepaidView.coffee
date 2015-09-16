@@ -4,6 +4,7 @@ stripeHandler = require 'core/services/stripe'
 {getPrepaidCodeAmount} = require '../../core/utils'
 CocoCollection = require 'collections/CocoCollection'
 Prepaid = require '../../models/Prepaid'
+utils = require 'core/utils'
 
 module.exports = class PrepaidView extends RootView
   id: 'prepaid-view'
@@ -36,8 +37,7 @@ module.exports = class PrepaidView extends RootView
       @render?()
 
     @supermodel.loadCollection(@codes, 'prepaid', {cache: false})
-
-    @ppc = ''
+    @ppc = utils.getQueryVariable('_ppc') ? ''
 
   getRenderData: ->
     c = super()
