@@ -14,74 +14,82 @@ block content
         a(href="/account", data-i18n="nav.account")
       li.active(data-i18n="account.prepaid")
 
-    ul
-      li TODO: Add option to email purchased codes
-
     .row
-      .col-md-6
+      .col-md-12
         .panel.panel-default
           .panel-heading
-            .panel-title(data-i18n="account_prepaid.purchase_code")
-          .panel-body
-            .form-horizontal
-              .form-group
-                label.control-label.col-sm-2(for="users") Users
-                .col-sm-10
-                  input#users.form-control(name="users", type="number", value="#{purchase.users}", min=1)
-              .form-group
-                label.control-label.col-sm-2(for="months") Months
-                .col-sm-10
-                  input#months.form-control(name="months", type="number", value="#{purchase.months}", min=1)
-              .form-group
-                label.control-label.col-sm-2(data-i18n="account_prepaid.purchase_total")
-                .col-sm-10
-                  p.form-control-static $
-                    span#total #{purchase.total}
-              button#purchase-button.btn.btn-success.pull-right(data-i18n="account_prepaid.purchase_button")
-
-      .col-md-6
-        .panel.panel-default
-          .panel-heading
-            .panel-title(data-i18n="account_prepaid.redeem_codes")
-          .panel-body
-            .form-horizontal
-              .form-group
-                label.control-label.col-sm-4(for="ppc") Prepaid Code:
-                .col-sm-8
-                  input#ppc.form-control(name="ppc", type="text", value="#{ppc}" required)
-              button#redeem-button.btn.btn-success.pull-right Redeem This Code to My Account
+            .panel-title
+              a(data-toggle="collapse" href="#purchasepanel")
+                span(data-i18n="account_prepaid.purchase_code")
+          .panel-collapse.collapse(class=ppc ? "": "in")#purchasepanel
+            .panel-body
+              p Each code can be redeemed by a number of accounts, and adds a number of months to the end of any existing subscription time on the redeemer's account.
+              .form-horizontal
+                .form-group
+                  label.control-label.col-md-2(for="users") Users
+                  .col-md-2
+                    input#users.form-control(name="users", type="number", value="#{purchase.users}", min=1)
+                .form-group
+                  label.control-label.col-md-2(for="months") Months
+                  .col-md-2
+                    input#months.form-control(name="months", type="number", value="#{purchase.months}", min=1)
+                .form-group
+                  label.control-label.col-md-2(data-i18n="account_prepaid.purchase_total")
+                  .col-md-10
+                    p.form-control-static $
+                      span#total #{purchase.total}
+                button#purchase-button.btn.btn-success.pull-right(data-i18n="account_prepaid.purchase_button")
     .row
-      .col-md-10.col-md-offset-1
+      .col-md-12
         .panel.panel-default
           .panel-heading
-            .panel-title(data-i18n="account_prepaid.your_codes")
-          .panel-body
-            if codes && codes.length
-              table.table.table-striped
-                tr
-                  th Link
-                  th Code
-                  th Redeemers
-                  th Months
-                  th Purchased / Redeemed
-                for code in codes.models
-                  if code.get('type') === 'terminal_subscription'
-                    - var properties = code.get('properties')
-                    - var redeemers = code.get('redeemers')
-                    if redeemers
-                      - var redeemed = redeemers.length
-                    else
-                      - var redeemed = '0'
-                    tr
-                      td
-                        a(href="/account/prepaid?_ppc=#{code.get('code')}")
-                          span.glyphicon.glyphicon-link
-                      td= code.get('code')
-                      td #{redeemed} / #{code.get('maxRedeemers')}
-                      td= properties.months || '-'
-                      if code.get('creator') == me.id
-                        td Purchased
+            .panel-title
+              a(data-toggle="collapse" href="#redeempanel")
+                span(data-i18n="account_prepaid.redeem_codes")
+          .panel-collapse.collapse.in#redeempanel
+            .panel-body
+              .form-horizontal
+                .form-group
+                  label.control-label.col-md-2(for="ppc") Code:
+                  .col-md-10
+                    input#ppc.form-control(name="ppc", type="text", value="#{ppc}" required)
+                button#redeem-button.btn.btn-success.pull-right View Code Details
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            .panel-title
+              a(data-toggle="collapse" href="#codeslist")
+                span(data-i18n="account_prepaid.your_codes")
+          .panel-collapse.collapse.in#codeslist
+            .panel-body
+              if codes && codes.length
+                table.table.table-striped
+                  tr
+                    th Code
+                    th Months
+                    th Quantity
+                    th Status
+                  for code in codes.models
+                    if code.get('type') === 'terminal_subscription'
+                      - var owner = (code.get('creator') == me.id ? true : false)
+                      - var properties = code.get('properties')
+                      - var redeemers = code.get('redeemers')
+                      if redeemers
+                        - var redeemed = redeemers.length
                       else
-                        td Redeemed
-            else
-              p No codes yet!
+                        - var redeemed = '0'
+                      tr
+                        td
+                          a(href="/account/prepaid?_ppc=#{code.get('code')}")= code.get('code')
+                        td= properties.months || '-'
+                        if owner
+                          td= code.get('maxRedeemers') - redeemed
+                        else
+                          td - 
+                        if owner
+                          td Purchased
+                        else
+                          td Redeemed
+              else
+                p No codes yet!

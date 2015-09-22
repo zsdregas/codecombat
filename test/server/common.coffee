@@ -127,6 +127,10 @@ GLOBAL.createPrepaid = (type, maxRedeemers, done) ->
     maxRedeemers: maxRedeemers
   request.post options, done
 
+GLOBAL.fetchPrepaid = (ppc, done) ->
+  options = uri: GLOBAL.getURL('/db/prepaid/-/code/'+ppc)
+  request.get options, done
+
 GLOBAL.purchasePrepaid = (type, maxRedeemers, months, done) ->
   options = uri: GLOBAL.getURL('/db/prepaid/-/purchase')
   options.json =

@@ -1157,12 +1157,12 @@
     success: "Successfully paid. Thanks!"
 
   account_prepaid:
-    purchase_code: "Purchase Codes"
+    purchase_code: "Purchase Subscription Code"
     purchase_amount: "Amount"
     purchase_total: "Total"
     purchase_button: "Submit Purchase"
     your_codes: "Your Codes:"
-    redeem_codes: "Redeem Codes"
+    redeem_codes: "Redeem Subscription Code"
 
   loading_error:
     could_not_load: "Error loading from server"

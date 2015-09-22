@@ -1289,6 +1289,9 @@ describe 'Subscriptions', ->
                         unsubscribeRecipient user1, recipients.get(0), ->
                           User.findById user1.id, (err, user1) ->
                             stripeInfo = user1.get('stripe')
+                            expect(stripeInfo.customerID).toBeDefined()
+                            expect(stripeInfo.sponsorSubscriptionID).toBeDefined()
+                            return done() unless stripeInfo.customerID and stripeInfo.sponsorSubscriptionID
                             expect(stripeInfo.recipients.length).toEqual(recipientCount - 1)
                             verifyNotSponsoring user1.id, recipients.get(0).id, ->
                               verifyNotRecipient recipients.get(0).id, ->

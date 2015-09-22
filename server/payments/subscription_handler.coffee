@@ -197,7 +197,7 @@ class SubscriptionHandler extends Handler
 
   subscribeWithPrepaidCode: (req, res) ->
     return @sendForbiddenError(res) unless req.user?
-    return @sendForbiddenError(res) unless req.body?.ppc
+    return @sendBadInputError(res,"You must provide a valid prepaid code") unless req.body?.ppc
 
     # Check if code exists and has room for more redeemers
     Prepaid.findOne({ code: req.body.ppc?.toString() }).exec (err, prepaid) =>

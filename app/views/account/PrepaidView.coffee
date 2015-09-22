@@ -5,6 +5,8 @@ stripeHandler = require 'core/services/stripe'
 CocoCollection = require 'collections/CocoCollection'
 Prepaid = require '../../models/Prepaid'
 utils = require 'core/utils'
+RedeemModal = require 'views/account/PrepaidRedeemModal'
+
 
 module.exports = class PrepaidView extends RootView
   id: 'prepaid-view'
@@ -46,7 +48,7 @@ module.exports = class PrepaidView extends RootView
     c.ppc = @ppc
     c
 
-  uiMessage: (message, type='alert') ->
+  statusMessage: (message, type='alert') ->
     noty text: message, layout: 'topCenter', type: type, killer: false, timeout: 5000, dismissQueue: true, maxVisible: 3
 
   updateTotal: ->
@@ -81,34 +83,47 @@ module.exports = class PrepaidView extends RootView
 
   onRedeemClicked: (e) ->
     @ppc = $('#ppc').val()
-    @uiMessage "You must enter a code.", "error"
-    return unless @ppc
-    button = e.target
-    @redeemText = $(e.target).text()
-    $(button).text('Redeeming...')
-    button.disabled = true
+
+    unless @ppc
+      @statusMessage "You must enter a code.", "error"
+      return
+    options =
+      url: '/db/prepaid/-/code/'+ @ppc
+      method: 'GET'
+
+    options.success = (model, res, options) =>
+      redeemModal = new RedeemModal ppc: model
+      redeemModal.on 'confirm-redeem', @confirmRedeem
+      @openModalView redeemModal
+
+    options.error = (model, res, options) =>
+      console.warn 'Error getting Prepaid Code'
+
+    prepaid = new Prepaid()
+    prepaid.fetch(options)
+    # @supermodel.addRequestResource('get_prepaid', options, 0).load()
+
+
+  confirmRedeem: =>
 
     options =
       url: '/db/subscription/-/subscribe_prepaid'
       method: 'POST'
       data: { ppc: @ppc }
 
-    options.error = (model, res, options) =>
+    options.error = (model, res, options, foo) =>
       console.error 'FAILED redeeming prepaid code'
-      button.disabled = false
-      $(button).text(@redeemText)
-      @uiMessage "Error: Could not redeem prepaid code", "error"
+      msg = model.responseText ? ''
+      @statusMessage "Error: Could not redeem prepaid code. #{msg}", "error"
 
     options.success = (model, res, options) =>
       console.log 'SUCCESS redeeming prepaid code'
-      @uiMessage "Prepaid Code Redeemed!", "success"
-      button.disabled = false
-      $(button).text(@redeemText)
+      @statusMessage "Prepaid Code Redeemed!", "success"
       @supermodel.loadCollection(@codes, 'prepaid', {cache: false})
       @codes.fetch()
-      @render?()
 
     @supermodel.addRequestResource('subscribe_prepaid', options, 0).load()
+
 
   onStripeReceivedToken: (e) ->
     # TODO: show that something is happening in the UI
@@ -129,14 +144,13 @@ module.exports = class PrepaidView extends RootView
     options.error = (model, response, options) =>
       console.error 'FAILED: Prepaid purchase', response
       console.error options
-      @uiMessage "Error purchasing prepaid code", "error"
+      @statusMessage "Error purchasing prepaid code", "error"
       # Not sure when this will happen. Stripe popup seems to give appropriate error messages.
 
     options.success = (model, response, options) =>
       console.log 'SUCCESS: Prepaid purchase', model.code
-      @uiMessage "Successfully purchased Prepaid Code!", "success"
+      @statusMessage "Successfully purchased Prepaid Code!", "success"
       @codes.add(model)
 
-    @uiMessage "Finalizing purchase...", "information"
+    @statusMessage "Finalizing purchase...", "information"
     @supermodel.addRequestResource('purchase_prepaid', options, 0).load()
-

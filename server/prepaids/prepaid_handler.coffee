@@ -9,7 +9,7 @@ StripeUtils = require '../lib/stripe_utils'
 PrepaidHandler = class PrepaidHandler extends Handler
   modelClass: Prepaid
   jsonSchema: require '../../app/schemas/models/prepaid.schema'
-  allowedMethods: ['POST']
+  allowedMethods: ['GET','POST']
 
   baseAmount: 999
 
@@ -21,9 +21,23 @@ PrepaidHandler = class PrepaidHandler extends Handler
 
   getByRelationship: (req, res, args...) ->
     relationship = args[1]
+    return @getPrepaid(req, res, args[2]) if relationship is 'code'
     return @createPrepaid(req, res) if relationship is 'create'
     return @purchasePrepaid(req, res) if relationship is 'purchase'
     super arguments...
+
+  getPrepaid: (req, res, code) ->
+    return @sendForbiddenError(res) unless req.user?
+    return @sendNotFoundError(res, "You must specify a code") unless code
+
+    Prepaid.findOne({ code: code.toString() }).exec (err, prepaid) =>
+      if err
+        console.warn "Get Prepaid Code Error [#{req.user.get('slug')} (#{req.user.id})]: #{JSON.stringify(err)}"
+        return @sendDatabaseError(res, err)
+
+      return @sendNotFoundError(res, "Code not found") unless prepaid
+
+      @sendSuccess(res, prepaid.toObject())
 
   createPrepaid: (req, res) ->
     return @sendForbiddenError(res) unless @hasAccess(req)

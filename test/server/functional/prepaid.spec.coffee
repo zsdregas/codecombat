@@ -220,9 +220,32 @@ describe '/db/prepaid', ->
     loginJoe (joe) ->
       subscribeWithPrepaid '', (err, res) ->
         expect(err).toBeNull()
+        expect(res.statusCode).toEqual(422)
+        done()
+
+  it 'Anonymous cant fetch a prepaid code', (done) ->
+    expect(joeCode).not.toBeNull()
+    logoutUser () ->
+      fetchPrepaid joeCode, (err, res) ->
+        expect(err).toBeNull()
         expect(res.statusCode).toEqual(403)
         done()
 
+  it 'User can fetch a prepaid code', (done) ->
+    expect(joeCode).not.toBeNull()
+    loginJoe (joe) ->
+      fetchPrepaid joeCode, (err, res, body) ->
+        expect(err).toBeNull()
+        expect(res.statusCode).toEqual(200)
+
+        expect(body).toBeDefined()
+        return done() unless body
+
+        prepaid = JSON.parse(body)
+        expect(prepaid.code).toEqual(joeCode)
+        expect(prepaid.maxRedeemers).toEqual(3)
+        expect(prepaid.properties?.months).toEqual(3)
+        done()
 
   it 'Creator can redeeem a prepaid code', (done) ->
     loginJoe (joe) ->
