@@ -6,6 +6,7 @@ CocoCollection = require 'collections/CocoCollection'
 Prepaid = require '../../models/Prepaid'
 utils = require 'core/utils'
 RedeemModal = require 'views/account/PrepaidRedeemModal'
+forms = require 'core/forms'
 
 
 module.exports = class PrepaidView extends RootView
@@ -53,24 +54,42 @@ module.exports = class PrepaidView extends RootView
 
   updateTotal: ->
     @purchase.total = getPrepaidCodeAmount(@baseAmount, @purchase.users, @purchase.months)
-    @render()
+    @renderSelectors("#total", "#users", "#months")
+
 
   # Form Input Callbacks
   onUsersChanged: (e) ->
     newAmount = $(e.target).val()
     newAmount = 1 if newAmount < 1
     @purchase.users = newAmount
-    @purchase.months = 3 if newAmount < 3 and @purchase.months < 3
+    el = $('#purchasepanel')
+    if newAmount < 3 and @purchase.months < 3
+      message = "Either Users or Months must be greater than 2"
+      err = [message: message, property: 'users', formatted: true]
+      forms.clearFormAlerts(el)
+      forms.applyErrorsToForm(el, err)
+    else
+      forms.clearFormAlerts(el)
+
     @updateTotal()
 
   onMonthsChanged: (e) ->
     newAmount = $(e.target).val()
     newAmount = 1 if newAmount < 1
     @purchase.months = newAmount
-    @purchase.users = 3 if newAmount < 3 and @purchase.users < 3
+    el = $('#purchasepanel')
+    if newAmount < 3 and @purchase.users < 3
+      message = "Either Users or Months must be greater than 2"
+      err = [message: message, property: 'months', formatted: true]
+      forms.clearFormAlerts(el)
+      forms.applyErrorsToForm(el, err)
+    else
+      forms.clearFormAlerts(el)
+
     @updateTotal()
 
   onPurchaseClicked: (e) ->
+    return unless $("#users").val() >= 3 or $("#months").val() >= 3
     @purchaseTimestamp = new Date().getTime()
     @stripeAmount = @purchase.total * 100
     @description = "Prepaid Code for " + @purchase.users + " users / " + @purchase.months + " months"
