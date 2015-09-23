@@ -49,6 +49,10 @@ module.exports = class PrepaidView extends RootView
     c.ppc = @ppc
     c
 
+  afterRender: ->
+    super()
+    @$el.find("span[title]").tooltip()
+
   statusMessage: (message, type='alert') ->
     noty text: message, layout: 'topCenter', type: type, killer: false, timeout: 5000, dismissQueue: true, maxVisible: 3
 

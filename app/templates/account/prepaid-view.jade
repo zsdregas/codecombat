@@ -23,7 +23,9 @@ block content
                 span(data-i18n="account_prepaid.purchase_code")
           .panel-collapse.collapse(class=ppc ? "": "in")#purchasepanel
             .panel-body
-              p Each code can be redeemed by a number of accounts, and adds a number of months to the end of any existing subscription time on the redeemer's account.
+              p Subscription Codes can be redeemed to add premium subscription time to one or more Code Combat accounts. 
+              p Each Code Combat account can only redeem a particular Subscription Code once.
+              p Subscription Code months will be added to the end of any existing subscription on the account.
               .form-horizontal
                 .form-group
                   label.control-label.col-md-2(for="users") Users
@@ -66,7 +68,9 @@ block content
               if codes && codes.length
                 table.table.table-striped
                   tr
-                    th Code
+                    th 
+                      span(title="You can copy the code's link and send it to someone.") Code 
+                        span.glyphicon.glyphicon-question-sign(aria-hidden="true")
                     th Months
                     th Quantity
                     th Status
