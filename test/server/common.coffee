@@ -120,11 +120,13 @@ wrapUpGetUser = (email, user, done) ->
 GLOBAL.getURL = (path) ->
   return 'http://localhost:3001' + path
 
-GLOBAL.createPrepaid = (type, maxRedeemers, done) ->
+GLOBAL.createPrepaid = (type, maxRedeemers, months, done) ->
   options = uri: GLOBAL.getURL('/db/prepaid/-/create')
   options.json =
     type: type
     maxRedeemers: maxRedeemers
+  if months
+    options.json.months = months
   request.post options, done
 
 GLOBAL.fetchPrepaid = (ppc, done) ->

@@ -27,7 +27,7 @@ describe '/db/prepaid', ->
       done()
 
   it 'Anonymous creates prepaid code', (done) ->
-    createPrepaid 'subscription', 1, (err, res, body) ->
+    createPrepaid 'subscription', 1, 0, (err, res, body) ->
       expect(err).toBeNull()
       expect(res.statusCode).toBe(401)
       done()
@@ -35,7 +35,7 @@ describe '/db/prepaid', ->
   it 'Non-admin creates prepaid code', (done) ->
     loginNewUser (user1) ->
       expect(user1.isAdmin()).toEqual(false)
-      createPrepaid 'subscription', 4, (err, res, body) ->
+      createPrepaid 'subscription', 4, 0, (err, res, body) ->
         expect(err).toBeNull()
         expect(res.statusCode).toBe(403)
         done()
@@ -46,10 +46,27 @@ describe '/db/prepaid', ->
       user1.save (err, user1) ->
         expect(err).toBeNull()
         expect(user1.isAdmin()).toEqual(true)
-        createPrepaid 'subscription', 1, (err, res, body) ->
+        createPrepaid 'subscription', 1, 0, (err, res, body) ->
           expect(err).toBeNull()
           expect(res.statusCode).toBe(200)
           verifyPrepaid user1, body, done
+
+  it 'Admin creates prepaid code with type terminal_subscription', (done) ->
+    loginNewUser (user1) ->
+      user1.set('permissions', ['admin'])
+      user1.save (err, user1) ->
+        expect(err).toBeNull()
+        expect(user1.isAdmin()).toEqual(true)
+        createPrepaid 'terminal_subscription', 2, 3, (err, res, body) ->
+          expect(err).toBeNull()
+          expect(res.statusCode).toBe(200)
+          expect(body.creator).toEqual(user1.id)
+          expect(body.type).toEqual('terminal_subscription')
+          expect(body.maxRedeemers).toEqual(2)
+          expect(body.properties?.months).toEqual(3)
+          expect(body.code).toMatch(/^\w{8}$/)
+          done()
+
 
   it 'Admin creates prepaid code with invalid type', (done) ->
     loginNewUser (user1) ->
@@ -57,7 +74,7 @@ describe '/db/prepaid', ->
       user1.save (err, user1) ->
         expect(err).toBeNull()
         expect(user1.isAdmin()).toEqual(true)
-        createPrepaid 'bulldozer', 1, (err, res, body) ->
+        createPrepaid 'bulldozer', 1, 0, (err, res, body) ->
           expect(err).toBeNull()
           expect(res.statusCode).toBe(403)
           done()
@@ -68,7 +85,7 @@ describe '/db/prepaid', ->
       user1.save (err, user1) ->
         expect(err).toBeNull()
         expect(user1.isAdmin()).toEqual(true)
-        createPrepaid null, 1, (err, res, body) ->
+        createPrepaid null, 1, 0, (err, res, body) ->
           expect(err).toBeNull()
           expect(res.statusCode).toBe(403)
           done()
@@ -79,7 +96,7 @@ describe '/db/prepaid', ->
       user1.save (err, user1) ->
         expect(err).toBeNull()
         expect(user1.isAdmin()).toEqual(true)
-        createPrepaid 'subscription', 0, (err, res, body) ->
+        createPrepaid 'subscription', 0, 0, (err, res, body) ->
           expect(err).toBeNull()
           expect(res.statusCode).toBe(403)
           done()
@@ -98,7 +115,7 @@ describe '/db/prepaid', ->
       user1.save (err, user1) ->
         expect(err).toBeNull()
         expect(user1.isAdmin()).toEqual(true)
-        createPrepaid 'subscription', 1, (err, res, prepaid) ->
+        createPrepaid 'subscription', 1, 0, (err, res, prepaid) ->
           expect(err).toBeNull()
           expect(res.statusCode).toBe(200)
           request.get {uri: prepaidURL}, (err, res, body) ->

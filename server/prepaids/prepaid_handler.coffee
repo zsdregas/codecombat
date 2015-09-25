@@ -41,17 +41,28 @@ PrepaidHandler = class PrepaidHandler extends Handler
 
   createPrepaid: (req, res) ->
     return @sendForbiddenError(res) unless @hasAccess(req)
-    return @sendForbiddenError(res) unless req.body.type is 'subscription'
+    return @sendForbiddenError(res) unless req.body.type in ['subscription','terminal_subscription']
     return @sendForbiddenError(res) unless req.body.maxRedeemers > 0
+
     Prepaid.generateNewCode (code) =>
       return @sendDatabaseError(res, 'Database error.') unless code
-      prepaid = new Prepaid
+      # TODO: change the creator to use ObjectID like with the terminal_subscription
+      options =
         creator: req.user.id
         type: req.body.type
         code: code
         maxRedeemers: req.body.maxRedeemers
-        properties:
-          couponID: 'free'
+        properties: {}
+        redeemers: []
+
+      if req.body.type is 'subscription'
+        options.properties.couponID = 'free'
+
+      if req.body.type is 'terminal_subscription'
+        options.properties.months = req.body.months
+        options.creator = req.user._id
+
+      prepaid = new Prepaid options
       prepaid.save (err) =>
         return @sendDatabaseError(res, err) if err
         @sendSuccess(res, prepaid.toObject())
