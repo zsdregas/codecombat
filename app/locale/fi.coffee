@@ -31,6 +31,7 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
     contact: "Ota yhteyttä"
     twitter_follow: "Seuraa"
     teachers: "Opettajat"
+#    careers: "Careers"
 
   modal:
     close: "Sulje"
@@ -299,11 +300,11 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
     tip_tell_friends: "Pidätkö CodeCombatista? Kerro meistä myös ystävillesi!"
     tip_beta_launch: "CodeCombat avattiin betatestaukseen lokakuussa 2013."
     tip_think_solution: "Mieti ratkaisua, älä ongelmaa."
-#    tip_theory_practice: "In theory, there is no difference between theory and practice. But in practice, there is. - Yogi Berra"
-#    tip_error_free: "There are two ways to write error-free programs; only the third one works. - Alan Perlis"
-#    tip_debugging_program: "If debugging is the process of removing bugs, then programming must be the process of putting them in. - Edsger W. Dijkstra"
-#    tip_forums: "Head over to the forums and tell us what you think!"
-#    tip_baby_coders: "In the future, even babies will be Archmages."
+    tip_theory_practice: "Teoriassa teoria ja käytäntö ovat sama asia. Käytännössä näin ei ole. - Yogi Berra"
+    tip_error_free: "Virheettömiä ohjelmia voi kirjoittaa kahdella eri tavalla. Ikävä kyllä kolmas tapa on ainoa toimiva. - Alan Perlis"
+    tip_debugging_program: "Jos debuggaus tarkoittaa virheiden poistamista ohjelmasta, niin ohjelmoinnin on tarkoitettava niiden lisäämistä. - Edsger W. Dijkstra"
+    tip_forums: "Tulepa keskustelupalstalle kertomaan mielipiteesi!"
+    tip_baby_coders: "Tulevaisuudessa jopa vauvoista tulee Arkkimaageja."
 #    tip_morale_improves: "Loading will continue until morale improves."
 #    tip_all_species: "We believe in equal opportunities to learn programming for all species."
 #    tip_reticulating: "Reticulating spines."
@@ -410,6 +411,7 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
     feature7: "<strong>Yksityisklaanit</strong>"
     free: "Ilmainen"
     month: "kuukausi"
+#    must_be_logged: "You must be logged in first. Please create an account or log in from the menu above."
     subscribe_title: "Tilaa"
     unsubscribe: "Poista tilaus"
     confirm_unsubscribe: "Varmista tilauksen poisto"
@@ -462,7 +464,7 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
     managed_by: "Hallinnoija"
     will_be_cancelled: "Peruutus astuu voimaan"
     currently_free: "Sinulla on tällähetkellä ilmainen tilaus"
-    currently_free_until: "Tilauksesi on voimassa"
+    currently_free_until: "Tilauksesi on voimassa" # {changed}
     was_free_until: "Ilmainen tilauksesi päättyi"
     managed_subs: "Hallinnoidut tilaukset"
     managed_subs_desc: "Lisää tilaus toiselle pelaajalle (oppilas, lapsesi, jne.)"
@@ -512,10 +514,10 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
     backstab: "Selkäänpuukotus" # As in "this dagger does this much backstab damage"
     skills: "Taidot"
     attack_1: "Tekee"
-    attack_2: "vahinkoa" # The hero type name inserted between here, does not fit in finnish. it could be replaced just with "sankarin"
+    attack_2: "vahinkoa"
     attack_3: "käyttämän aseen vahingosta."
     health_1: "Antaa"
-    health_2: "terveyttä" # The hero type name inserted between here, does not fit in finnish. it could be replaced just with "sankarin"
+    health_2: "terveyttä"
     health_3: "käyttämien suojien terveydestä."
     speed_1: "Liikkuu"
     speed_2: "metriä sekunnissa."
@@ -612,6 +614,7 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
     free_1: "Käytössäsi on 110+ ILMAISTA tasoa, jotka kattavat koko ohjelmoinnin perustan."
     free_2: "Maksullinen kuukausitilaus avaa pääsyn video-oppaisiin ja lisätasoihin."
     teacher_subs_title: "Opettajat saavat ilmaisen kuukausitilauksen!"
+#    teacher_subs_0: "We offer free subscriptions to teachers for evaluation purposes."
     teacher_subs_1: "Ole hyvä ja täytä"
     teacher_subs_2: "opettajan kysely"
     teacher_subs_3: "ottaaksesi tilauksesi käyttöön."
@@ -1076,10 +1079,16 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
 #    tournament_blurb: "Write code, collect gold, build armies, crush foes, win prizes, and upgrade your career in our $40,000 Greed tournament! Check out the details"
 #    tournament_blurb_criss_cross: "Win bids, construct paths, outwit opponents, grab gems, and upgrade your career in our Criss-Cross tournament! Check out the details"
 #    tournament_blurb_zero_sum: "Unleash your coding creativity in both gold gathering and battle tactics in this alpine mirror match between red sorcerer and blue sorcerer. The tournament began on Friday, March 27 and will run until Monday, April 6 at 5PM PDT. Compete for fun and glory! Check out the details"
+#    tournament_blurb_ace_of_coders: "Battle it out in the frozen glacier in this domination-style mirror match! The tournament began on Wednesday, September 16 and will run until Wednesday, October 14 at 5PM PDT. Check out the details"
 #    tournament_blurb_blog: "on our blog"
 #    rules: "Rules"
 #    winners: "Winners"
 #    league: "League"
+#    red_ai: "Red AI" # "Red AI Wins", at end of multiplayer match playback
+#    blue_ai: "Blue AI"
+#    wins: "Wins" # At end of multiplayer match playback
+#    humans: "Red" # Ladder page display team name
+#    ogres: "Blue"
 
   user:
     stats: "Tilastot"
@@ -1250,6 +1259,9 @@ module.exports = nativeDescription: "suomi", englishDescription: "Finnish", tran
 
 #  guide:
 #    temp: "Temp"
+
+#  temp:
+#    ace_of_coders_tournament: "New: play in the Ace of Coders tournament now!"
 
 #  multiplayer:
 #    multiplayer_title: "Multiplayer Settings" # We'll be changing this around significantly soon. Until then, it's not important to translate.

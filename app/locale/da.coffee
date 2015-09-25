@@ -1,6 +1,6 @@
 module.exports = nativeDescription: "dansk", englishDescription: "Danish", translation:
   home:
-    slogan: "Lær at Kode ved at Spille et Spil"
+    slogan: "Lær at kode ved at spille et spil"
     no_ie: "CodeCombat kan desværre ikke køre i Internet Explorer 8 eller ældre. Beklager!" # Warning that only shows up in IE8 and older
     no_mobile: "CodeCombat er ikke designet til mobile enheder og vil måske ikke virke!" # Warning that shows up on mobile devices
     play: "Spil" # The big play button that opens up the campaign view.
@@ -31,6 +31,7 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
     contact: "Kontakt"
     twitter_follow: "Følg"
     teachers: "Lærere"
+#    careers: "Careers"
 
   modal:
     close: "Luk"
@@ -97,7 +98,7 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
     log_out: "Log Ud"
     forgot_password: "Glemt dit kodeord?"
     authenticate_gplus: "Forbind med G+"
-    load_profile: "Load G+ Profil"
+    load_profile: "Indlæs G+ Profil"
     finishing: "Færdiggører"
     sign_in_with_facebook: "Log ind med Facebook"
     sign_in_with_gplus: "Sign in with G+"
@@ -309,8 +310,8 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #    tip_reticulating: "Reticulating spines."
     tip_harry: "Du' en troldmand, "
     tip_great_responsibility: "Med store kodeevner kommer stort fejlfindingsansvnar."
-#    tip_munchkin: "If you don't eat your vegetables, a munchkin will come after you while you're asleep."
-#    tip_binary: "There are only 10 types of people in the world: those who understand binary, and those who don't."
+    tip_munchkin: "Hvis du ikke spiser dine grøntsager, kommer der en Munchkin efter dig mens du sover."
+    tip_binary: "Der findes kun 10 slags mennesker i verdenen: Dem som forstår binært, og dem som ikke gør."
 #    tip_commitment_yoda: "A programmer must have the deepest commitment, the most serious mind. ~ Yoda"
 #    tip_no_try: "Do. Or do not. There is no try. - Yoda"
 #    tip_patience: "Patience you must have, young Padawan. - Yoda"
@@ -333,33 +334,33 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #    tip_source_code: "I want to change the world but they would not give me the source code."
 #    tip_javascript_java: "Java is to JavaScript what Car is to Carpet. - Chris Heilmann"
 #    tip_move_forward: "Whatever you do, keep moving forward. - Martin Luther King Jr."
-#    tip_google: "Have a problem you can't solve? Google it!"
-#    tip_adding_evil: "Adding a pinch of evil."
+    tip_google: "Har du et problem du ikke kan løse? Google det!"
+    tip_adding_evil: "Tilføjer et strejf af ondskab.."
 #    tip_hate_computers: "That's the thing about people who think they hate computers. What they really hate is lousy programmers. - Larry Niven"
 #    tip_open_source_contribute: "You can help CodeCombat improve!"
 #    tip_recurse: "To iterate is human, to recurse divine. - L. Peter Deutsch"
 #    tip_free_your_mind: "You have to let it all go, Neo. Fear, doubt, and disbelief. Free your mind. - Morpheus"
 #    tip_strong_opponents: "Even the strongest of opponents always has a weakness. - Itachi Uchiha"
-#    tip_paper_and_pen: "Before you start coding, you can always plan with a sheet of paper and a pen."
+    tip_paper_and_pen: "Før du starter med at programmere, kan du altid sætte dig ned med et stykke papir og blyant."
 
   game_menu:
-#    inventory_tab: "Inventory"
-#    save_load_tab: "Save/Load"
-#    options_tab: "Options"
-#    guide_tab: "Guide"
+    inventory_tab: "Dine ting"
+    save_load_tab: "Gem/Indlæs"
+    options_tab: "Indstillinger"
+    guide_tab: "Guide"
 #    guide_video_tutorial: "Video Tutorial"
-#    guide_tips: "Tips"
+    guide_tips: "Råd"
     multiplayer_tab: "Flere spillere"
-#    auth_tab: "Sign Up"
-#    inventory_caption: "Equip your hero"
-#    choose_hero_caption: "Choose hero, language"
-#    save_load_caption: "... and view history"
-#    options_caption: "Configure settings"
+    auth_tab: "Tilmeld dig"
+    inventory_caption: "Udrust din helt"
+    choose_hero_caption: "Vælg helt, sprog"
+    save_load_caption: "... og se historie"
+    options_caption: "Ændre indstillinger"
 #    guide_caption: "Docs and tips"
-#    multiplayer_caption: "Play with friends!"
-#    auth_caption: "Save your progress."
+    multiplayer_caption: "Spil med venner!"
+    auth_caption: "Gem dit spil."
 
-#  leaderboard:
+  leaderboard:
 #    leaderboard: "Leaderboard"
 #    view_other_solutions: "View Leaderboards"
 #    scores: "Scores"
@@ -370,7 +371,7 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #    time: "Time"
 #    damage_taken: "Damage Taken"
 #    damage_dealt: "Damage Dealt"
-#    difficulty: "Difficulty"
+    difficulty: "Sværhedsgrad"
 #    gold_collected: "Gold Collected"
 
 #  inventory:
@@ -410,6 +411,7 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #    feature7: "Private <strong>Clans</strong>"
 #    free: "Free"
 #    month: "month"
+#    must_be_logged: "You must be logged in first. Please create an account or log in from the menu above."
 #    subscribe_title: "Subscribe"
 #    unsubscribe: "Unsubscribe"
 #    confirm_unsubscribe: "Confirm Unsubscribe"
@@ -526,6 +528,8 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #  skill_docs:
 #    writable: "writable" # Hover over "attack" in Your Skills while playing a level to see most of this
 #    read_only: "read-only"
+#    action: "Action"
+#    spell: "Spell"
 #    action_name: "name"
 #    action_cooldown: "Takes"
 #    action_specific_cooldown: "Cooldown"
@@ -610,6 +614,7 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #    free_1: "There are 110+ FREE levels which cover every concept."
 #    free_2: "A monthly subscription provides access to video tutorials and extra practice levels."
 #    teacher_subs_title: "Teachers get free subscriptions!"
+#    teacher_subs_0: "We offer free subscriptions to teachers for evaluation purposes."
 #    teacher_subs_1: "Please fill out our"
 #    teacher_subs_2: "Teacher Survey"
 #    teacher_subs_3: "to set up your subscription."
@@ -694,7 +699,7 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
     contact_us: "Kontakt CodeCombat"
     welcome: "Godt at høre fra dig! Brug denne formular til at sende os en email. "
     forum_prefix: "For noget offentligt, prøv venligst "
-    forum_page: "vores forum"
+    forum_page: "Vores forum"
     forum_suffix: " istedet."
 #    faq_prefix: "There's also a"
 #    faq: "FAQ"
@@ -1074,10 +1079,16 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 #    tournament_blurb: "Write code, collect gold, build armies, crush foes, win prizes, and upgrade your career in our $40,000 Greed tournament! Check out the details"
 #    tournament_blurb_criss_cross: "Win bids, construct paths, outwit opponents, grab gems, and upgrade your career in our Criss-Cross tournament! Check out the details"
 #    tournament_blurb_zero_sum: "Unleash your coding creativity in both gold gathering and battle tactics in this alpine mirror match between red sorcerer and blue sorcerer. The tournament began on Friday, March 27 and will run until Monday, April 6 at 5PM PDT. Compete for fun and glory! Check out the details"
+#    tournament_blurb_ace_of_coders: "Battle it out in the frozen glacier in this domination-style mirror match! The tournament began on Wednesday, September 16 and will run until Wednesday, October 14 at 5PM PDT. Check out the details"
 #    tournament_blurb_blog: "on our blog"
 #    rules: "Rules"
 #    winners: "Winners"
 #    league: "League"
+#    red_ai: "Red AI" # "Red AI Wins", at end of multiplayer match playback
+#    blue_ai: "Blue AI"
+#    wins: "Wins" # At end of multiplayer match playback
+#    humans: "Red" # Ladder page display team name
+#    ogres: "Blue"
 
 #  user:
 #    stats: "Stats"
@@ -1248,6 +1259,9 @@ module.exports = nativeDescription: "dansk", englishDescription: "Danish", trans
 
 #  guide:
 #    temp: "Temp"
+
+#  temp:
+#    ace_of_coders_tournament: "New: play in the Ace of Coders tournament now!"
 
   multiplayer:
     multiplayer_title: "Flerspillerinstillinger" # We'll be changing this around significantly soon. Until then, it's not important to translate.

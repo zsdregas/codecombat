@@ -31,6 +31,7 @@ module.exports = nativeDescription: "български език", englishDescri
     contact: "Контакти"
     twitter_follow: "Започни да следиш"
     teachers: "Учители"
+#    careers: "Careers"
 
   modal:
     close: "Затвори"
@@ -410,6 +411,7 @@ module.exports = nativeDescription: "български език", englishDescri
 #    feature7: "Private <strong>Clans</strong>"
 #    free: "Free"
 #    month: "month"
+#    must_be_logged: "You must be logged in first. Please create an account or log in from the menu above."
     subscribe_title: "Абонирай се"
     unsubscribe: "Прекрати абонамента"
     confirm_unsubscribe: "Подтвърди прекратяване на абонамента"
@@ -421,7 +423,7 @@ module.exports = nativeDescription: "български език", englishDescri
     unsubscribe_feedback_placeholder: "O, къде сбъркахме?"
     parent_button: "Попитай родител"
     parent_email_description: "Ще ги уведомим с email така че ще могат да ти купят абонамент за CodeCombat."
-    parent_email_input_invalid: "Email адресът е невалиден." 
+    parent_email_input_invalid: "Email адресът е невалиден."
     parent_email_input_label: "Родителски email адрес"
     parent_email_input_placeholder: "Въведи email на родител"
     parent_email_send: "Изпрати Email"
@@ -485,47 +487,49 @@ module.exports = nativeDescription: "български език", englishDescri
 #    subscribe_prepaid: "Click Subscribe to use prepaid code"
 #    using_prepaid: "Using prepaid code for monthly subscription"
 
-#  choose_hero:
-#    choose_hero: "Choose Your Hero"
-#    programming_language: "Programming Language"
-#    programming_language_description: "Which programming language do you want to use?"
-#    default: "Default"
-#    experimental: "Experimental"
-#    python_blurb: "Simple yet powerful, great for beginners and experts."
-#    javascript_blurb: "The language of the web. (Not the same as Java.)"
-#    coffeescript_blurb: "Nicer JavaScript syntax."
-#    clojure_blurb: "A modern Lisp."
-#    lua_blurb: "Game scripting language."
-#    io_blurb: "Simple but obscure."
-#    status: "Status"
-#    hero_type: "Type"
-#    weapons: "Weapons"
-#    weapons_warrior: "Swords - Short Range, No Magic"
-#    weapons_ranger: "Crossbows, Guns - Long Range, No Magic"
-#    weapons_wizard: "Wands, Staffs - Long Range, Magic"
-#    attack: "Damage" # Can also translate as "Attack"
-#    health: "Health"
-#    speed: "Speed"
-#    regeneration: "Regeneration"
-#    range: "Range" # As in "attack or visual range"
-#    blocks: "Blocks" # As in "this shield blocks this much damage"
-#    backstab: "Backstab" # As in "this dagger does this much backstab damage"
-#    skills: "Skills"
-#    attack_1: "Deals"
-#    attack_2: "of listed"
-#    attack_3: "weapon damage."
-#    health_1: "Gains"
-#    health_2: "of listed"
-#    health_3: "armor health."
-#    speed_1: "Moves at"
-#    speed_2: "meters per second."
-#    available_for_purchase: "Available for Purchase" # Shows up when you have unlocked, but not purchased, a hero in the hero store
-#    level_to_unlock: "Level to unlock:" # Label for which level you have to beat to unlock a particular hero (click a locked hero in the store to see)
-#    restricted_to_certain_heroes: "Only certain heroes can play this level."
+  choose_hero:
+    choose_hero: "Избери си герой"
+    programming_language: "Език за програмиране"
+    programming_language_description: "Кой език за програмиране би искал да използваш?"
+    default: "По подразбиране"
+    experimental: "Експериментално"
+    python_blurb: "Прост,но мощен, идеален за начинаещи и експерти."
+    javascript_blurb: "Езикът на мрежата. (Не е същия като Java.)"
+    coffeescript_blurb: "По-добър синтаксис от JavaScript."
+    clojure_blurb: "Модерен Lisp."
+    lua_blurb: "Скриптен език за игри."
+    io_blurb: "Прост, но неизвестен."
+    status: "Статус"
+    hero_type: "Тип"
+    weapons: "Оръжия"
+    weapons_warrior: "Мечове - Къс Обсег, Без Магия"
+    weapons_ranger: "Арбалети, Пистолети - Далечен Обсег, Без магия"
+    weapons_wizard: "Жезли, Принадлежности - Далечен Обсег, Магия"
+    attack: "Щета" # Can also translate as "Attack"
+    health: "Здраве"
+    speed: "Скорост"
+    regeneration: "Възстановяване"
+    range: "Обсег" # As in "attack or visual range"
+    blocks: "Защита" # As in "this shield blocks this much damage"
+    backstab: "Удар в гърба" # As in "this dagger does this much backstab damage"
+    skills: "Умения"
+    attack_1: "Количество"
+    attack_2: "на изброените"
+    attack_3: "щети от оръжия."
+    health_1: "Печалби"
+    health_2: "от изброените"
+    health_3: "защитни брони."
+    speed_1: "Движения"
+    speed_2: "в метри за секунда"
+    available_for_purchase: "На разположение за закупуване" # Shows up when you have unlocked, but not purchased, a hero in the hero store
+    level_to_unlock: "Ниво на отключване:" # Label for which level you have to beat to unlock a particular hero (click a locked hero in the store to see)
+    restricted_to_certain_heroes: "Само определени герои могат да играят това ниво."
 
 #  skill_docs:
 #    writable: "writable" # Hover over "attack" in Your Skills while playing a level to see most of this
 #    read_only: "read-only"
+#    action: "Action"
+#    spell: "Spell"
 #    action_name: "name"
 #    action_cooldown: "Takes"
 #    action_specific_cooldown: "Cooldown"
@@ -610,6 +614,7 @@ module.exports = nativeDescription: "български език", englishDescri
 #    free_1: "There are 110+ FREE levels which cover every concept."
 #    free_2: "A monthly subscription provides access to video tutorials and extra practice levels."
 #    teacher_subs_title: "Teachers get free subscriptions!"
+#    teacher_subs_0: "We offer free subscriptions to teachers for evaluation purposes."
 #    teacher_subs_1: "Please fill out our"
 #    teacher_subs_2: "Teacher Survey"
 #    teacher_subs_3: "to set up your subscription."
@@ -1074,10 +1079,16 @@ module.exports = nativeDescription: "български език", englishDescri
 #    tournament_blurb: "Write code, collect gold, build armies, crush foes, win prizes, and upgrade your career in our $40,000 Greed tournament! Check out the details"
 #    tournament_blurb_criss_cross: "Win bids, construct paths, outwit opponents, grab gems, and upgrade your career in our Criss-Cross tournament! Check out the details"
 #    tournament_blurb_zero_sum: "Unleash your coding creativity in both gold gathering and battle tactics in this alpine mirror match between red sorcerer and blue sorcerer. The tournament began on Friday, March 27 and will run until Monday, April 6 at 5PM PDT. Compete for fun and glory! Check out the details"
+#    tournament_blurb_ace_of_coders: "Battle it out in the frozen glacier in this domination-style mirror match! The tournament began on Wednesday, September 16 and will run until Wednesday, October 14 at 5PM PDT. Check out the details"
 #    tournament_blurb_blog: "on our blog"
 #    rules: "Rules"
 #    winners: "Winners"
 #    league: "League"
+#    red_ai: "Red AI" # "Red AI Wins", at end of multiplayer match playback
+#    blue_ai: "Blue AI"
+#    wins: "Wins" # At end of multiplayer match playback
+#    humans: "Red" # Ladder page display team name
+#    ogres: "Blue"
 
 #  user:
 #    stats: "Stats"
@@ -1248,6 +1259,9 @@ module.exports = nativeDescription: "български език", englishDescri
 
 #  guide:
 #    temp: "Temp"
+
+#  temp:
+#    ace_of_coders_tournament: "New: play in the Ace of Coders tournament now!"
 
 #  multiplayer:
 #    multiplayer_title: "Multiplayer Settings" # We'll be changing this around significantly soon. Until then, it's not important to translate.

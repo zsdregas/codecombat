@@ -33,10 +33,12 @@ module.exports = class LadderTabView extends CocoView
     @teams = teamDataFromLevel @level
     @leaderboards = {}
     @refreshLadder()
-    @socialNetworkRes = @supermodel.addSomethingResource('social_network_apis', 0)
-    @checkFriends()
+    # Trying not loading the FP/G+ stuff for now to see if anyone complains they were using it so we can have just two columns.
+    #@socialNetworkRes = @supermodel.addSomethingResource('social_network_apis', 0)
+    #@checkFriends()
 
   checkFriends: ->
+    return  # Skipping for now
     return if @checked or (not window.FB) or (not window.gapi)
     @checked = true
 
@@ -185,6 +187,7 @@ module.exports = class LadderTabView extends CocoView
     ctx.capitalize = _.string.capitalize
     ctx.league = @options.league
     ctx._ = _
+    ctx.moment = moment
     ctx
 
   generateHistogram: (histogramElement, histogramData, teamName) ->
@@ -196,9 +199,9 @@ module.exports = class LadderTabView extends CocoView
       top: 20
       right: 20
       bottom: 30
-      left: 0
+      left: 15
 
-    width = 300 - margin.left - margin.right
+    width = 470 - margin.left - margin.right
     height = 125 - margin.top - margin.bottom
 
     formatCount = d3.format(',.0')

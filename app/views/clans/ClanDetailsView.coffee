@@ -51,7 +51,6 @@ module.exports = class ClanDetailsView extends RootView
     @clan = new Clan _id: @clanID
     @members = new CocoCollection([], { url: "/db/clan/#{@clanID}/members", model: User, comparator: 'nameLower' })
     @memberAchievements = new CocoCollection([], { url: "/db/clan/#{@clanID}/member_achievements", model: EarnedAchievement, comparator:'_id' })
-    # MemberSessions: only loads creatorName, levelName, codeLanguage, submittedCodeLanguage for each session
     @memberSessions = new CocoCollection([], { url: "/db/clan/#{@clanID}/member_sessions", model: LevelSession, comparator:'_id' })
 
     @listenTo me, 'sync', => @render?()
@@ -191,7 +190,6 @@ module.exports = class ClanDetailsView extends RootView
         name: utils.i18n(campaign.attributes, 'fullName') or utils.i18n(campaign.attributes, 'name')
         levels: []
       for levelID, level of campaign.get('levels')
-        continue if level.slug is 'ace-of-coders' and new Date() < new Date(1441863900000)
         campaignLevelProgression.levels.push
           ID: levelID
           slug: level.slug

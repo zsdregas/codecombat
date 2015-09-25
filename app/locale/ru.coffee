@@ -31,6 +31,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     contact: "Связаться"
     twitter_follow: "Подписаться"
     teachers: "Учителям"
+#    careers: "Careers"
 
   modal:
     close: "Закрыть"
@@ -340,7 +341,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     tip_recurse: "Итерация свойственна человеку, рекурсия божественна. - L. Peter Deutsch"
     tip_free_your_mind: "Отвлекись от всего, Нео. Страх, неверие, сомнения отбрось — очисти свой разум. - Morpheus"
     tip_strong_opponents: "Даже сильнейший противник имеет слабость. - Itachi Uchiha"
-#    tip_paper_and_pen: "Before you start coding, you can always plan with a sheet of paper and a pen."
+    tip_paper_and_pen: "Прежде чем приступить к решению, попробуй решить задачу с помощью бумаги и ручки."
 
   game_menu:
     inventory_tab: "Инвентарь"
@@ -410,6 +411,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     feature7: "Частные <strong>Кланы</strong>"
     free: "Бесплатно"
     month: "месяц"
+#    must_be_logged: "You must be logged in first. Please create an account or log in from the menu above."
     subscribe_title: "Подпишись"
     unsubscribe: "Отписаться"
     confirm_unsubscribe: "Подтвердить отмену подписки"
@@ -437,24 +439,24 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     payment_methods_title: "Принимаемые методы оплаты"
     payment_methods_blurb1: "На данный момент мы принимаем кредитные карты и Alipay."
     payment_methods_blurb2: "Если вам необходим альтернативный способ оплаты, пожалуйста, свяжитесь"
-#    sale_already_subscribed: "You're already subscribed!"
-#    sale_blurb1: "Save 35%"
-#    sale_blurb2: "off regular subscription price of $120 for a whole year!" # {changed}
-#    sale_button: "Sale!"
-#    sale_button_title: "Save 35% when you purchase a 1 year subscription"
-#    sale_click_here: "Click Here"
-#    sale_ends: "Ends"
-#    sale_extended: "*Existing subscriptions will be extended by 1 year."
-#    sale_feature_here: "Here's what you'll get:"
-#    sale_feature2: "Access to 9 powerful <strong>new heroes</strong> with unique skills!"
-#    sale_feature4: "<strong>42,000 bonus gems</strong> awarded immediately!"
-#    sale_continue: "Ready to continue adventuring?"
-#    sale_limited_time: "Limited time offer!"
-#    sale_new_heroes: "New heroes!"
-#    sale_title: "Back to School Sale"
-#    sale_view_button: "Buy 1 year subscription for"
+    sale_already_subscribed: "У вас уже есть подписка!"
+    sale_blurb1: "Скидка 35%"
+    sale_blurb2: "от годовой подписки за $120 на весь год!" # {changed}
+    sale_button: "Распродажа!"
+    sale_button_title: "Сэкономьте 35% при приобретении годовой подписки"
+    sale_click_here: "Нажмите сюда"
+    sale_ends: "Заканчивается"
+    sale_extended: "*Текущие подписки будут продлены на год."
+    sale_feature_here: "Вот что вы получите:"
+    sale_feature2: "Доступ к 9 сильным<strong>новым героям</strong>с уникальными умениями!"
+    sale_feature4: "<strong>42,000 бонусных самоцветов</strong> в подарок!"
+    sale_continue: "Готовы продолжить путешествие?"
+    sale_limited_time: "Ограниченное предложение!"
+    sale_new_heroes: "Новые герои!"
+    sale_title: "Назад на школьную распродажу"
+    sale_view_button: "Купи годовую подписку за"
     stripe_description: "Месячная подписка"
-#    stripe_description_year_sale: "1 Year Subscription (35% discount)"
+    stripe_description_year_sale: "Годовая подписка (35% скидка)"
     subscription_required_to_play: "Чтобы сыграть этот уровень нужна подписка."
     unlock_help_videos: "Подпишитесь, чтобы разблокировать все обучающие видео."
     personal_sub: "Личная подписка" # Accounts Subscription View below
@@ -526,6 +528,8 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
   skill_docs:
     writable: "доступно для записи" # Hover over "attack" in Your Skills while playing a level to see most of this
     read_only: "только чтение"
+#    action: "Action"
+#    spell: "Spell"
     action_name: "имя"
     action_cooldown: "Применяется"
     action_specific_cooldown: "Восстановление"
@@ -610,6 +614,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     free_1: "В наличии более 80 БЕСПЛАТНЫХ уровней, которые покрывают каждый концепт." # {change}
     free_2: "Месячная подписка предоставляет доступ к видео-урокам и дополнительным уровням."
     teacher_subs_title: "Учителя получают бесплатные подписки!"
+#    teacher_subs_0: "We offer free subscriptions to teachers for evaluation purposes."
     teacher_subs_1: "Пожалуйста, заполните нашу"
     teacher_subs_2: "Анкету учителя"
     teacher_subs_3: "для настройки вашей подписки."
@@ -836,7 +841,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     latest_achievement: "Последнее достижение"
     playtime: "Время игры"
     last_played: "Последняя игра"
-#    leagues_explanation: "Play in a league against other clan members in these multiplayer arena instances."
+    leagues_explanation: "Играйте в лиге против других членов клана на мультиплеерной арене."
 
   classes:
     archmage_title: "Архимаг"
@@ -1026,7 +1031,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     my_matches: "Мои матчи"
     simulate: "Симулирование"
     simulation_explanation: "Симулированием игр вы сможете быстрее получить оценку игры!"
-#    simulation_explanation_leagues: "You will mainly help simulate games for allied players in your clans and courses."
+    simulation_explanation_leagues: "Вы поможете симулировать игры для союзных игроков в вашем клане или курсе."
     simulate_games: "Симулировать игры!"
     simulate_all: "СБРОСИТЬ И СИМУЛИРОВАТЬ ИГРЫ"
     games_simulated_by: "Игры, симулированные вами:"
@@ -1074,10 +1079,16 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     tournament_blurb: "Пишите код, собирайте золото, стройте армию, крушите противников, получайте призы и улучшайте вашу карьеру в нашем \"$40,000 турнире жадности\"! Узнайте больше"
     tournament_blurb_criss_cross: "Выигрывайте ставки, создавайте пути, перехитрите оппонентов, собирайте самоцветы и улучшайте вашу карьеру в нашем турнире Criss-Cross! Узнайте больше"
     tournament_blurb_zero_sum: "Дайте волю своей программистской фантазии в собирании золота и боевой тактике в этом высокогорном зеркальном матче между красным волшебником и синим волшебником. Турнир начался в пятницу, 27 марта, и продолжится до 17.00 PDT понедельника, 6 апреля. Участвуйте для веселья и славы! Посмотрите детали"
+#    tournament_blurb_ace_of_coders: "Battle it out in the frozen glacier in this domination-style mirror match! The tournament began on Wednesday, September 16 and will run until Wednesday, October 14 at 5PM PDT. Check out the details"
     tournament_blurb_blog: "в нашем блоге"
     rules: "Правила"
     winners: "Победители"
-#    league: "League"
+    league: "Лига"
+#    red_ai: "Red AI" # "Red AI Wins", at end of multiplayer match playback
+#    blue_ai: "Blue AI"
+#    wins: "Wins" # At end of multiplayer match playback
+#    humans: "Red" # Ladder page display team name
+#    ogres: "Blue"
 
   user:
     stats: "Характеристики"
@@ -1118,7 +1129,7 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     no_recent_games: "Нет сыгранных игр за последние две недели."
     payments: "Платежи"
     purchased: "Куплено"
-#    sale: "Sale"
+    sale: "Распродажа"
     subscription: "Подписка"
     invoices: "Счета"
     service_apple: "Apple"
@@ -1218,18 +1229,18 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
     arithmetic: "Арифметика"
     arrays: "Массивы"
     basic_syntax: "Базовый синтаксис"
-    boolean_logic: "Булева логика"
-#    break_statements: "Break Statements"
+    boolean_logic: "Булевая логика"
+    break_statements: "Оператор \"break\""
     classes: "Классы"
-#    continue_statements: "Continue Statements"
+    continue_statements: "Оператор \"continue\""
     for_loops: "Циклы \"for\""
     functions: "Функции"
-#    graphics: "Graphics"
+    graphics: "Графика"
     if_statements: "Условные операторы"
     input_handling: "Обработка ввода"
     math_operations: "Математические операции"
     object_literals: "Литералы объектов"
-#    parameters: "Parameters"
+    parameters: "Параметры"
     strings: "Строки"
     variables: "Переменные"
     vectors: "Векторы"
@@ -1248,6 +1259,9 @@ module.exports = nativeDescription: "русский", englishDescription: "Russi
 
   guide:
     temp: "Временный"
+
+#  temp:
+#    ace_of_coders_tournament: "New: play in the Ace of Coders tournament now!"
 
   multiplayer:
     multiplayer_title: "Настройки мультиплеера" # We'll be changing this around significantly soon. Until then, it's not important to translate.

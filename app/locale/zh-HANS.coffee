@@ -31,6 +31,7 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     contact: "联系我们"
     twitter_follow: "关注"
     teachers: "教师"
+#    careers: "Careers"
 
   modal:
     close: "关闭"
@@ -410,6 +411,7 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     feature7: "私人 <strong>部落</strong>"
     free: "免费"
     month: "月"
+    must_be_logged: "您需要先登入。请先注册或者在上方的目录中点击登入。"
     subscribe_title: "订阅"
     unsubscribe: "取消订阅"
     confirm_unsubscribe: "确认取消订阅"
@@ -439,7 +441,7 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     payment_methods_blurb2: "如果您想用其他付费方式,请联系我们"
     sale_already_subscribed: "您已经订阅!"
     sale_blurb1: "和正常一年的订阅价格 $120 相比"
-    sale_blurb2: "年费订阅能节省 35%！"
+    sale_blurb2: "年费订阅能节省 35%！" # {changed}
     sale_button: "促销"
     sale_button_title: "年费订阅能节省 35% 的费用"
     sale_click_here: "点击这里"
@@ -462,7 +464,7 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     managed_by: "管理"
     will_be_cancelled: "将被取消"
     currently_free: "您目前有一个免费订阅"
-    currently_free_until: "您目前有一个订阅，直到"
+    currently_free_until: "您目前有一个订阅，直到" # {changed}
     was_free_until: "您有过一个免费订阅，直到"
     managed_subs: "管理订阅"
     managed_subs_desc: "为其他玩家（学生、儿童等）添加订阅。"
@@ -612,6 +614,7 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     free_1: "有110多个覆盖了所有理论的免费关卡。"
     free_2: "包月订阅可以访问视频教程和额外的练习关卡。"
     teacher_subs_title: "教师可免费订阅!"
+    teacher_subs_0: "我们可为教师提供用于评估的免费订阅。"
     teacher_subs_1: "请填写我们的"
     teacher_subs_2: "教师调查"
     teacher_subs_3: "建立您的订阅。"
@@ -667,7 +670,7 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     denied_2: "拒绝。"
     contact_1: "如果你有进一步的问题, 请联系"
     contact_2: "。"
-    description_1: "我们可为教师提供用于评估的免费订阅. 你可以在我们的"
+    description_1: "我们可为教师提供用于评估的免费订阅。你可以在我们的"
     description_2: "教师"
     description_3: "页面找到更多的信息。"
     description_4: "请填写此简单问卷，我们将会向您的电子邮件发送设置说明。"
@@ -1076,14 +1079,15 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
     tournament_blurb: "写代码，收金币，建军队，碎敌军，赢奖品，以及在我们奖励多达$40,000的Greed tournament里升级您的事业！ 快去查阅详情！"
     tournament_blurb_criss_cross: "赢得竞拍，建造道路，智胜对手，夺取宝石，在纵横交错锦标赛中完成生涯晋级! 现在就查看详情！"
     tournament_blurb_zero_sum: "在红方法师和蓝方法师的山峰对决中, 同时在收集金币和战术上发挥你的代码创造力. 竞赛在3月27日开始, 在4月6日(星期一)的下午5点(PDT 太平洋时区)结束. 为乐趣和荣耀竞赛吧! 浏览了解更多"
+    tournament_blurb_ace_of_coders: "我的主场我主宰，在天寒地冻的冰原上和自己的镜像大战一场吧！本次比赛将由9月16日星期三开办到10月14日下午5点PDT。详情请查看"
     tournament_blurb_blog: "关注我们的博客"
     rules: "规则"
     winners: "胜利者"
     league: "联盟"
-    red_ai: "红方 AI"  # "Red AI Wins", at end of multiplayer match playback
+    red_ai: "红方 AI" # "Red AI Wins", at end of multiplayer match playback
     blue_ai: "蓝方 AI"
-    wins: "胜利"  # At end of multiplayer match playback
-    humans: "红方"  # Ladder page display team name
+    wins: "胜利" # At end of multiplayer match playback
+    humans: "红方" # Ladder page display team name
     ogres: "蓝方"
 
   user:
@@ -1255,6 +1259,9 @@ module.exports = nativeDescription: "简体中文", englishDescription: "Chinese
 
   guide:
     temp: "临时"
+
+#  temp:
+#    ace_of_coders_tournament: "New: play in the Ace of Coders tournament now!"
 
   multiplayer:
     multiplayer_title: "多人游戏设置" # We'll be changing this around significantly soon. Until then, it's not important to translate.

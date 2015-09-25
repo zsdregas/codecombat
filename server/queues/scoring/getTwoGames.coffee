@@ -17,7 +17,7 @@ sessionSelectionString = 'team totalScore transpiledCode submittedCodeLanguage t
 sendSessionsResponse = (res) ->
   (err, sessions) ->
     if err then return errors.serverError res, "Couldn't get two games to simulate: #{err}"
-    unless sessions.length is 2
+    unless _.filter(sessions).length is 2
       console.log 'No games to score.', sessions.length
       res.send 204, 'No games to score.'
       return res.end()
@@ -66,7 +66,7 @@ getRandomSessions = (user, callback) ->
 
 # Sampling by level: we pick a level, then find a human and ogre session for that level, one at random, one biased towards recent submissions.
 #ladderLevelIDs = ['greed', 'criss-cross', 'brawlwood', 'dungeon-arena', 'gold-rush', 'sky-span']  # Let's not give any extra simulations to old ladders.
-ladderLevelIDs = ['dueling-grounds', 'cavern-survival', 'multiplayer-treasure-grove', 'harrowland', 'zero-sum', 'ace-of-coders']
+ladderLevelIDs = ['dueling-grounds', 'cavern-survival', 'multiplayer-treasure-grove', 'harrowland', 'zero-sum', 'ace-of-coders', 'ace-of-coders', 'ace-of-coders', 'ace-of-coders']
 sampleByLevel = (callback) ->
   levelID = _.sample ladderLevelIDs
   favorRecentHumans = Math.random() < 0.5  # We pick one session favoring recent submissions, then find another one uniformly to play against
@@ -110,5 +110,3 @@ findEarliestSubmission = (queryParams, callback) ->
     return callback err if err
     result = earliestSubmissionCache[cacheKey] = earliest?.submitDate
     callback null, result
-
-

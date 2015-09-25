@@ -267,7 +267,7 @@ module.exports = class CampaignView extends RootView
     level.locked = false if @campaign?.get('name') is 'Auditions'
     level.locked = false if @campaign?.get('name') is 'Intro'
     level.locked = false if me.isInGodMode()
-    level.locked = false if level.slug is 'robot-ragnarok'
+    #level.locked = false if level.slug is 'robot-ragnarok'
     level.disabled = true if level.adminOnly and @levelStatusMap[level.slug] not in ['started', 'complete']
     level.disabled = false if me.isInGodMode()
     level.color = 'rgb(255, 80, 60)'
@@ -305,6 +305,11 @@ module.exports = class CampaignView extends RootView
   determineNextLevel: (levels) ->
     foundNext = false
     dontPointTo = ['lost-viking', 'kithgard-mastery']  # Challenge levels we don't want most players bashing heads against
+    subscriptionPrompts = [{slug: 'boom-and-bust', unless: 'defense-of-plainswood'}]
+    if me.getSubscriptionPromptGroup() is 'favorable-odds'
+      subscriptionPrompts.push slug: 'favorable-odds', unless: 'the-raised-sword'
+    if me.getSubscriptionPromptGroup() is 'tactical-strike'
+      subscriptionPrompts.push slug: 'tactical-strike', unless: 'a-mayhem-of-munchkins'
     for level in levels
       # Iterate through all levels in order and look to find the first unlocked one that meets all our criteria for being pointed out as the next level.
       level.nextLevels = (reward.level for reward in level.rewards ? [] when reward.level)
@@ -321,11 +326,8 @@ module.exports = class CampaignView extends RootView
 
           # Should we point this level out?
           if nextLevel and not nextLevel.locked and not nextLevel.disabled and @levelStatusMap[nextLevel.slug] isnt 'complete' and nextLevel.slug not in dontPointTo and not nextLevel.replayable and (
-            me.isPremium() or
-            not nextLevel.requiresSubscription or
-            (nextLevel.slug is 'boom-and-bust' and not @levelStatusMap['defense-of-plainswood']) or
-            (nextLevel.slug is 'favorable-odds' and not @levelStatusMap['the-raised-sword']) or
-            (nextLevel.slug is 'robot-ragnarok' and @levelStatusMap['the-raised-sword'])
+            me.isPremium() or not nextLevel.requiresSubscription or
+            _.any(subscriptionPrompts, (prompt) => nextLevel.slug is prompt.slug and not @levelStatusMap[prompt.unless])
           )
             nextLevel.next = true
             foundNext = true
@@ -381,7 +383,7 @@ module.exports = class CampaignView extends RootView
       particleKey.push 'premium' if level.requiresSubscription
       particleKey.push 'gate' if level.slug in ['kithgard-gates', 'siege-of-stonehold', 'clash-of-clones', 'summits-gate']
       particleKey.push 'hero' if level.unlocksHero and not level.unlockedHero
-      particleKey.push 'item' if level.slug is 'robot-ragnarok'  # TODO: generalize
+      #particleKey.push 'item' if level.slug is 'robot-ragnarok'  # TODO: generalize
       continue if particleKey.length is 2  # Don't show basic levels
       continue unless level.hidden or _.intersection(particleKey, ['item', 'hero-ladder', 'replayable']).length
       @particleMan.addEmitter level.position.x / 100, level.position.y / 100, particleKey.join('-')

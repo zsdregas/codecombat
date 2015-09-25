@@ -31,6 +31,7 @@
     contact: "Contact"
     twitter_follow: "Follow"
     teachers: "Teachers"
+    careers: "Careers"
 
   modal:
     close: "Close"
@@ -410,6 +411,7 @@
     feature7: "Private <strong>Clans</strong>"
     free: "Free"
     month: "month"
+    must_be_logged: "You must be logged in first. Please create an account or log in from the menu above."
     subscribe_title: "Subscribe"
     unsubscribe: "Unsubscribe"
     confirm_unsubscribe: "Confirm Unsubscribe"
@@ -439,7 +441,7 @@
     payment_methods_blurb2: "If you require an alternate form of payment, please contact"
     sale_already_subscribed: "You're already subscribed!"
     sale_blurb1: "Save 35%"
-    sale_blurb2: "off regular subscription price of $120 for a whole year!" # {changed}
+    sale_blurb2: "off regular subscription price of $120 for a whole year!"
     sale_button: "Sale!"
     sale_button_title: "Save 35% when you purchase a 1 year subscription"
     sale_click_here: "Click Here"
@@ -463,7 +465,7 @@
     managed_by: "Managed by"
     will_be_cancelled: "Will be cancelled on"
     currently_free: "You currently have a free subscription"
-    currently_free_until: "You currently have a subscription until" # {changed}
+    currently_free_until: "You currently have a subscription until"
     was_free_until: "You had a free subscription until"
     managed_subs: "Managed Subscriptions"
     managed_subs_desc: "Add subscriptions for other players (students, children, etc.)"
@@ -613,6 +615,7 @@
     free_1: "There are 110+ FREE levels which cover every concept."
     free_2: "A monthly subscription provides access to video tutorials and extra practice levels."
     teacher_subs_title: "Teachers get free subscriptions!"
+    teacher_subs_0: "We offer free subscriptions to teachers for evaluation purposes."
     teacher_subs_1: "Please fill out our"
     teacher_subs_2: "Teacher Survey"
     teacher_subs_3: "to set up your subscription."
@@ -1077,6 +1080,7 @@
     tournament_blurb: "Write code, collect gold, build armies, crush foes, win prizes, and upgrade your career in our $40,000 Greed tournament! Check out the details"
     tournament_blurb_criss_cross: "Win bids, construct paths, outwit opponents, grab gems, and upgrade your career in our Criss-Cross tournament! Check out the details"
     tournament_blurb_zero_sum: "Unleash your coding creativity in both gold gathering and battle tactics in this alpine mirror match between red sorcerer and blue sorcerer. The tournament began on Friday, March 27 and will run until Monday, April 6 at 5PM PDT. Compete for fun and glory! Check out the details"
+    tournament_blurb_ace_of_coders: "Battle it out in the frozen glacier in this domination-style mirror match! The tournament began on Wednesday, September 16 and will run until Wednesday, October 14 at 5PM PDT. Check out the details"
     tournament_blurb_blog: "on our blog"
     rules: "Rules"
     winners: "Winners"
@@ -1265,6 +1269,9 @@
 
   guide:
     temp: "Temp"
+
+  temp:
+    ace_of_coders_tournament: "New: play in the Ace of Coders tournament now!"
 
   multiplayer:
     multiplayer_title: "Multiplayer Settings"  # We'll be changing this around significantly soon. Until then, it's not important to translate.

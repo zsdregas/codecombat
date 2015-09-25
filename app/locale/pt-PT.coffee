@@ -31,6 +31,7 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     contact: "Contactar"
     twitter_follow: "Seguir"
     teachers: "Professores"
+    careers: "Carreiras"
 
   modal:
     close: "Fechar"
@@ -406,10 +407,11 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     feature3: "70+ níveis de bónus"
     feature4: "<strong>3500 gemas de bónus</strong> por mês!"
     feature5: "Tutoriais em vídeo"
-    feature6: "Apoio por e-mail superior"
+    feature6: "Apoio por e-mail prioritário"
     feature7: "<strong>Clãs</strong> Privados"
     free: "Grátis"
     month: "mês"
+    must_be_logged: "Primeiro tens de ter sessão iniciada. Por favor, cria uma conta ou inicia sessão a partir do menu acima."
     subscribe_title: "Subscrever"
     unsubscribe: "Cancelar Subscrição"
     confirm_unsubscribe: "Confirmar Cancelamento da Subscrição"
@@ -420,7 +422,7 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     sorry_to_see_you_go: "Lamentamos ver-te partir! Por favor, diz-nos o que podíamos ter feito melhor."
     unsubscribe_feedback_placeholder: "Oh, o que fomos fazer?"
     parent_button: "Pergunta ao teu educador"
-    parent_email_description: "Vamos mandar-lhe um e-mail para que ele possa comprar-te uma subscrição do CodeCombat."
+    parent_email_description: "Vamos enviar-lhe um e-mail para que possa comprar-te uma subscrição do CodeCombat."
     parent_email_input_invalid: "Endereço de e-mail inválido."
     parent_email_input_label: "Endereço de e-mail do educador"
     parent_email_input_placeholder: "Introduz o e-mail do educador"
@@ -429,12 +431,12 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     parent_email_title: "Qual é o e-mail do teu educador?"
     parents: "Para Educadores"
     parents_title: "Caro Educador: O seu educando está a aprender a programar. Vai ajudá-lo a continuar?"
-    parents_blurb1: "O seu educando já jogou __nLevels__ níveis e aprendeu as bases da programação. Ajude a desenvolver o interesse dele, comprando-lhe uma subscrição para que possa continuar a jogar."
+    parents_blurb1: "O seu educando já jogou __nLevels__ níveis e aprendeu as bases da programação. Ajude a desenvolver o interesse dele, comprando-lhe uma subscrição para que ele possa continuar a jogar."
     parents_blurb1a: "A programação de computadores é uma habilidade fundamental que o seu educando vai usar incontestavelmente quando for adulto. Em 2020, habilidades de programação básicas serão requisitadas por 77% dos empregos e, atualmente, há uma grande procura por engenheiros informáticos no mundo. Sabia que os cursos universitários ligados às Ciências da Computação são os mais bem pagos?"
     parents_blurb2: "Por $9.99 USD/mês, o seu educando recebe novos desafios todas as semanas e suporte pessoal, via e-mail, de programadores profissionais."
     parents_blurb3: "Sem Risco: 100% de garantia de devolução do dinheiro, com anulação fácil de 1 clique."
-    payment_methods: "Formas de Pagamento"
-    payment_methods_title: "Formas de Pagamento Aceites"
+    payment_methods: "Métodos de Pagamento"
+    payment_methods_title: "Métodos de Pagamento Aceites"
     payment_methods_blurb1: "Atualmente aceitamos cartões de crédito e Alipay."
     payment_methods_blurb2: "Se precisares de uma outra forma de pagamento, por favor contacta"
     sale_already_subscribed: "Já estás subscrito!"
@@ -475,7 +477,7 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     group_discounts_20: "20% de desconto"
     group_discounts_12th: "12ª+ subscrições"
     group_discounts_40: "40% de desconto"
-    subscribing: "A subscrever..."
+    subscribing: "A Subscrever..."
     recipient_emails_placeholder: "Introduz endereços de e-mail para subscrever, um por linha."
     subscribe_users: "Subscrever Utilizadores"
     users_subscribed: "Utilizadores subscritos:"
@@ -519,13 +521,15 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     health_3: "apresentado."
     speed_1: "Move a"
     speed_2: "metros por segundo."
-    available_for_purchase: "Disponível para Aquirir" # Shows up when you have unlocked, but not purchased, a hero in the hero store
+    available_for_purchase: "Disponível para Aquisição" # Shows up when you have unlocked, but not purchased, a hero in the hero store
     level_to_unlock: "Nível para desbloquear:" # Label for which level you have to beat to unlock a particular hero (click a locked hero in the store to see)
     restricted_to_certain_heroes: "Apenas certos heróis podem jogar este nível."
 
   skill_docs:
-    writable: "escrevível" # Hover over "attack" in Your Skills while playing a level to see most of this
+    writable: "editável" # Hover over "attack" in Your Skills while playing a level to see most of this
     read_only: "apenas leitura"
+    action: "Ação -"
+    spell: "Feitiço -"
     action_name: "nome"
     action_cooldown: "Demora"
     action_specific_cooldown: "Tempo de Recarga"
@@ -610,6 +614,7 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     free_1: "Há 110+ níveis GRATUITOS que abordam cada conceito."
     free_2: "Uma subscrição mensal garante acesso a tutoriais em vídeo e a níveis extra para praticar."
     teacher_subs_title: "Os professores recebem uma subscrição gratuita!"
+    teacher_subs_0: "Oferecemos subscrições gartuitas para professores, para fins de avaliação."
     teacher_subs_1: "Por favor, preenche o nosso"
     teacher_subs_2: "Inquérito para Professores"
     teacher_subs_3: "para configurares a tua subscrição."
@@ -1058,7 +1063,7 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     tutorial_skip: "Saltar Tutorial"
     tutorial_not_sure: "Não tens a certeza do que se passa?"
     tutorial_play_first: "Joga o Tutorial primeiro."
-    simple_ai: "Inteligência Artificial Simples"
+    simple_ai: "IA Simples"
     warmup: "Aquecimento"
     friends_playing: "Amigos a Jogar"
     log_in_for_friends: "Inicia sessão para jogares com os teus amigos!"
@@ -1074,10 +1079,16 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
     tournament_blurb: "Escreve código, recolhe ouro, constrói exércitos, esmaga inimigos, ganha prémios e melhora a tua carreira no nosso torneio $40,000 Greed! Confere os detalhes"
     tournament_blurb_criss_cross: "Ganha ofertas, constrói caminhos, supera os adversários, apanha gemas e melhore a tua carreira no nosso torneio Criss-Cross! Confere os detalhes"
     tournament_blurb_zero_sum: "Liberta a tua criatividade de programação tanto na recolha de ouro como em táticas de combate nesta batalha-espelhada na montaha, entre o feiticeiro vermelho e o feiticeiro azul. O torneio começou na Sexta-feira, 27 de Março, e decorrerá até às 00:00 de Terça-feira, 7 de Abril. Compete por diversão e glória! Confere os detalhes"
+    tournament_blurb_ace_of_coders: "Luta no glaciar congelado nesta partida espelhada do estilo domínio! O torneio começou Quarta-feira, 16 de Setembro, e decorrerá até Quarta-feira, 14 de Outubro às 23:00. Confere os detalhes"
     tournament_blurb_blog: "no nosso blog"
     rules: "Regras"
     winners: "Vencedores"
     league: "Liga"
+    red_ai: "IA Vermelha" # "Red AI Wins", at end of multiplayer match playback
+    blue_ai: "IA Azul"
+    wins: "Vence" # At end of multiplayer match playback
+    humans: "Vermelho" # Ladder page display team name
+    ogres: "Azul"
 
   user:
     stats: "Estatísticas"
@@ -1248,6 +1259,9 @@ module.exports = nativeDescription: "Português (Portugal)", englishDescription:
 
 #  guide:
 #    temp: "Temp"
+
+  temp:
+    ace_of_coders_tournament: "Novidade: joga agora no torneio 'Ás dos Programadores'!"
 
   multiplayer:
     multiplayer_title: "Definições Multijogador" # We'll be changing this around significantly soon. Until then, it's not important to translate.
