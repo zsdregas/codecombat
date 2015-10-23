@@ -289,7 +289,7 @@ describe 'CourseInstance', ->
                         expect(res.statusCode).toBe(403)
                         done()
 
-    it 'Redeem 50 count course prepaid codes 51 times, in parallel', (done) ->
+    xit 'Redeem 50 count course prepaid codes 51 times, in parallel', (done) ->
       stripe.tokens.create {
         card: { number: '4242424242424242', exp_month: 12, exp_year: 2020, cvc: '123' }
       }, (err, token) ->

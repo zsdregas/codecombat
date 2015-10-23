@@ -464,7 +464,7 @@ describe '/db/prepaid', ->
           expect(res.statusCode).not.toEqual(200)
           done()
 
-    it 'Test a bunch of people trying to redeem at once', (done) ->
+    xit 'Test a bunch of people trying to redeem at once', (done) ->
       doRedeem = (userX, code, testnum, retry, fnDone) =>
         loginUser userX, () =>
           endDate = new moment().add(3, 'months').toISOString().substring(0, 10)
