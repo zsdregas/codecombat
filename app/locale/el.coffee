@@ -84,9 +84,9 @@ module.exports = nativeDescription: "Ελληνικά", englishDescription: "Gre
 #    campaign_old_multiplayer_description: "Relics of a more civilized age. No simulations are run for these older, hero-less multiplayer arenas."
 
   share_progress_modal:
-#    blurb: "You’re making great progress! Tell your parent how much you've learned with CodeCombat."
-#    email_invalid: "Email address invalid."
-#    form_blurb: "Enter your parent's email below and we’ll show them!"
+#    blurb: "Δείχνεις μεγάλη πρόοδο! Πες στους γονείς σου πόσα πολλά έμαθες με το CodeCombat."
+#    email_invalid: "Άκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου."
+#    form_blurb: "Γράψε τη διεύθυνση ηλεκτρονικού ταχυδρομείου των γονιών και θα τους το δείξουμε!"
     form_label: "Διεύθυνση ηλεκτρονικού ταχυδρομίου"
     placeholder: "Διεύθυνση ηλεκτρονικού ταχυδρομίου"
     title: "Εξαιρετική Δουλειά, Μαθητευόμενε"
@@ -98,11 +98,11 @@ module.exports = nativeDescription: "Ελληνικά", englishDescription: "Gre
     log_out: "Αποσύνδεση"
     forgot_password: "Ξεχάσατε τον κωδικό σας;"
 #    authenticate_gplus: "Authenticate G+"
-#    load_profile: "Load G+ Profile"
-#    finishing: "Finishing"
+    load_profile: "Φόρτωση προφίλ του G+"
+    finishing: "Τελειώνουμε"
     sign_in_with_facebook: "Σύνδεση μέσω Facebook"
     sign_in_with_gplus: "Σύνδεση μέσω G+"
-#    signup_switch: "Want to create an account?"
+    signup_switch: "Θέλεις να δημιουργήσεις ένα λογαριασμό;"
 
   signup:
     email_announcements: "Λαμβάνετε ανακοινώσεις μέσω email"
@@ -111,7 +111,7 @@ module.exports = nativeDescription: "Ελληνικά", englishDescription: "Gre
     log_in: "Σύνδεση με κωδικό"
     social_signup: "Ή, μπορείς να συνδεθείς μέσω Facebook ή G+:"
     required: "Θα πρέπει να συνδεθείτε πριν πάτε προς τα εκεί."
-#    login_switch: "Already have an account?"
+    login_switch: "Έχεις ήδη λογαριασμό;"
 
   recover:
     recover_account_title: "Ανάκτηση λογαριασμού"
